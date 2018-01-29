@@ -30,6 +30,7 @@ var (
 		Init(stackTypes).
 		Init(userTypes).
 		Init(logTypes).
+		Init(pipelineTypes).
 		Init(globalTypes)
 )
 
@@ -219,4 +220,42 @@ func globalTypes(schema *types.Schemas) *types.Schemas {
 				return f
 			})
 		})
+}
+
+func pipelineTypes(schema *types.Schemas) *types.Schemas {
+	return schema.
+		AddMapperForType(&Version, &v3.ClusterPipeline{},
+			m.DisplayName{}).
+		AddMapperForType(&Version, &v3.Pipeline{},
+			&m.Embed{Field: "status"},
+			m.DisplayName{}).
+		AddMapperForType(&Version, &v3.PipelineHistory{},
+			&m.Embed{Field: "status"},
+			m.DisplayName{}).
+		AddMapperForType(&Version, &v3.RemoteAccount{},
+			m.DisplayName{}).
+		AddMapperForType(&Version, &v3.GitRepoCache{}).
+		MustImport(&Version, v3.ClusterPipeline{}).
+		MustImportAndCustomize(&Version, v3.Pipeline{}, func(schema *types.Schema) {
+
+			schema.ResourceActions = map[string]types.Action{
+				"activate":   {},
+				"deactivate": {},
+				"run":        {},
+				"export":     {},
+			}
+		}).
+		MustImportAndCustomize(&Version, v3.PipelineHistory{}, func(schema *types.Schema) {
+
+			schema.ResourceActions = map[string]types.Action{
+				"stop":  {},
+				"rerun": {},
+			}
+		}).
+		MustImportAndCustomize(&Version, v3.RemoteAccount{}, func(schema *types.Schema) {
+			schema.CollectionActions = map[string]types.Action{
+				"refreshrepos": {},
+			}
+		}).MustImport(&Version, v3.GitRepoCache{})
+
 }
