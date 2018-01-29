@@ -7,6 +7,24 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
+const (
+	StepTypeSCM        = "scm"
+	StepTypeRunScript  = "runScript"
+	StepTypeBuildImage = "buildImage"
+	TriggerTypeCron    = "cron"
+	TriggerTypeManual  = "manual"
+	TriggerTypeWebhook = "webhook"
+
+	StatusWaiting  = "Waiting"
+	StatusBuilding = "Building"
+	StatusSuccess  = "Success"
+	StatusFail     = "Fail"
+	StatusSkip     = "Skipped"
+	StatusAbort    = "Abort"
+	StatusPending  = "Pending"
+	StatusDenied   = "Denied"
+)
+
 type ClusterPipeline struct {
 	types.Namespaced
 
