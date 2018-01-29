@@ -16,6 +16,7 @@ const (
 	PipelineFieldName                 = "name"
 	PipelineFieldNamespaceId          = "namespaceId"
 	PipelineFieldOwnerReferences      = "ownerReferences"
+	PipelineFieldProjectId            = "projectId"
 	PipelineFieldRemoved              = "removed"
 	PipelineFieldStages               = "stages"
 	PipelineFieldState                = "state"
@@ -37,6 +38,7 @@ type Pipeline struct {
 	Name                 string            `json:"name,omitempty"`
 	NamespaceId          string            `json:"namespaceId,omitempty"`
 	OwnerReferences      []OwnerReference  `json:"ownerReferences,omitempty"`
+	ProjectId            string            `json:"projectId,omitempty"`
 	Removed              string            `json:"removed,omitempty"`
 	Stages               []Stage           `json:"stages,omitempty"`
 	State                string            `json:"state,omitempty"`
