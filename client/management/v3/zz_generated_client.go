@@ -34,6 +34,11 @@ type Client struct {
 	Preference                 PreferenceOperations
 	ClusterLogging             ClusterLoggingOperations
 	ProjectLogging             ProjectLoggingOperations
+	ClusterPipeline            ClusterPipelineOperations
+	Pipeline                   PipelineOperations
+	PipelineHistory            PipelineHistoryOperations
+	RemoteAccount              RemoteAccountOperations
+	GitRepoCache               GitRepoCacheOperations
 	ListenConfig               ListenConfigOperations
 	Setting                    SettingOperations
 }
@@ -75,6 +80,11 @@ func NewClient(opts *clientbase.ClientOpts) (*Client, error) {
 	client.Preference = newPreferenceClient(client)
 	client.ClusterLogging = newClusterLoggingClient(client)
 	client.ProjectLogging = newProjectLoggingClient(client)
+	client.ClusterPipeline = newClusterPipelineClient(client)
+	client.Pipeline = newPipelineClient(client)
+	client.PipelineHistory = newPipelineHistoryClient(client)
+	client.RemoteAccount = newRemoteAccountClient(client)
+	client.GitRepoCache = newGitRepoCacheClient(client)
 	client.ListenConfig = newListenConfigClient(client)
 	client.Setting = newSettingClient(client)
 

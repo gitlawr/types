@@ -40,6 +40,11 @@ type Interface interface {
 	PreferencesGetter
 	ClusterLoggingsGetter
 	ProjectLoggingsGetter
+	ClusterPipelinesGetter
+	PipelinesGetter
+	PipelineHistoriesGetter
+	RemoteAccountsGetter
+	GitRepoCachesGetter
 	ListenConfigsGetter
 	SettingsGetter
 }
@@ -75,6 +80,11 @@ type Client struct {
 	preferenceControllers                 map[string]PreferenceController
 	clusterLoggingControllers             map[string]ClusterLoggingController
 	projectLoggingControllers             map[string]ProjectLoggingController
+	clusterPipelineControllers            map[string]ClusterPipelineController
+	pipelineControllers                   map[string]PipelineController
+	pipelineHistoryControllers            map[string]PipelineHistoryController
+	remoteAccountControllers              map[string]RemoteAccountController
+	gitRepoCacheControllers               map[string]GitRepoCacheController
 	listenConfigControllers               map[string]ListenConfigController
 	settingControllers                    map[string]SettingController
 }
@@ -119,6 +129,11 @@ func NewForConfig(config rest.Config) (Interface, error) {
 		preferenceControllers:                 map[string]PreferenceController{},
 		clusterLoggingControllers:             map[string]ClusterLoggingController{},
 		projectLoggingControllers:             map[string]ProjectLoggingController{},
+		clusterPipelineControllers:            map[string]ClusterPipelineController{},
+		pipelineControllers:                   map[string]PipelineController{},
+		pipelineHistoryControllers:            map[string]PipelineHistoryController{},
+		remoteAccountControllers:              map[string]RemoteAccountController{},
+		gitRepoCacheControllers:               map[string]GitRepoCacheController{},
 		listenConfigControllers:               map[string]ListenConfigController{},
 		settingControllers:                    map[string]SettingController{},
 	}, nil
@@ -468,6 +483,71 @@ type ProjectLoggingsGetter interface {
 func (c *Client) ProjectLoggings(namespace string) ProjectLoggingInterface {
 	objectClient := clientbase.NewObjectClient(namespace, c.restClient, &ProjectLoggingResource, ProjectLoggingGroupVersionKind, projectLoggingFactory{})
 	return &projectLoggingClient{
+		ns:           namespace,
+		client:       c,
+		objectClient: objectClient,
+	}
+}
+
+type ClusterPipelinesGetter interface {
+	ClusterPipelines(namespace string) ClusterPipelineInterface
+}
+
+func (c *Client) ClusterPipelines(namespace string) ClusterPipelineInterface {
+	objectClient := clientbase.NewObjectClient(namespace, c.restClient, &ClusterPipelineResource, ClusterPipelineGroupVersionKind, clusterPipelineFactory{})
+	return &clusterPipelineClient{
+		ns:           namespace,
+		client:       c,
+		objectClient: objectClient,
+	}
+}
+
+type PipelinesGetter interface {
+	Pipelines(namespace string) PipelineInterface
+}
+
+func (c *Client) Pipelines(namespace string) PipelineInterface {
+	objectClient := clientbase.NewObjectClient(namespace, c.restClient, &PipelineResource, PipelineGroupVersionKind, pipelineFactory{})
+	return &pipelineClient{
+		ns:           namespace,
+		client:       c,
+		objectClient: objectClient,
+	}
+}
+
+type PipelineHistoriesGetter interface {
+	PipelineHistories(namespace string) PipelineHistoryInterface
+}
+
+func (c *Client) PipelineHistories(namespace string) PipelineHistoryInterface {
+	objectClient := clientbase.NewObjectClient(namespace, c.restClient, &PipelineHistoryResource, PipelineHistoryGroupVersionKind, pipelineHistoryFactory{})
+	return &pipelineHistoryClient{
+		ns:           namespace,
+		client:       c,
+		objectClient: objectClient,
+	}
+}
+
+type RemoteAccountsGetter interface {
+	RemoteAccounts(namespace string) RemoteAccountInterface
+}
+
+func (c *Client) RemoteAccounts(namespace string) RemoteAccountInterface {
+	objectClient := clientbase.NewObjectClient(namespace, c.restClient, &RemoteAccountResource, RemoteAccountGroupVersionKind, remoteAccountFactory{})
+	return &remoteAccountClient{
+		ns:           namespace,
+		client:       c,
+		objectClient: objectClient,
+	}
+}
+
+type GitRepoCachesGetter interface {
+	GitRepoCaches(namespace string) GitRepoCacheInterface
+}
+
+func (c *Client) GitRepoCaches(namespace string) GitRepoCacheInterface {
+	objectClient := clientbase.NewObjectClient(namespace, c.restClient, &GitRepoCacheResource, GitRepoCacheGroupVersionKind, gitRepoCacheFactory{})
+	return &gitRepoCacheClient{
 		ns:           namespace,
 		client:       c,
 		objectClient: objectClient,
