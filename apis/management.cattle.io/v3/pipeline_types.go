@@ -74,6 +74,8 @@ type PipelineStatus struct {
 }
 
 type PipelineSpec struct {
+	ProjectName string `json:"projectName" norman:"required,type=reference[project]"`
+
 	EnableTrigger bool        `json:"enableTrigger,omitempty" norman:"default=true"`
 	DisplayName   string      `json:"displayName,omitempty" norman:"required"`
 	CronTrigger   CronTrigger `json:"cronTrigger,omitempty" yaml:"cronTrigger,omitempty"`
@@ -134,6 +136,8 @@ type PipelineHistory struct {
 }
 
 type PipelineHistorySpec struct {
+	ProjectName string `json:"projectName" norman:"required,type=reference[project]"`
+
 	DisplayName string   `json:"displayName,omitempty" norman:"required"`
 	RunNumber   int      `json:"runNumber,omitempty" norman:"required,min=1"`
 	TriggerType string   `json:"triggerType,omitempty" norman:"required,options=manual|cron|webhook"`
