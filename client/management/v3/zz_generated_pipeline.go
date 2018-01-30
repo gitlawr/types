@@ -6,12 +6,12 @@ import (
 
 const (
 	PipelineType                      = "pipeline"
+	PipelineFieldActive               = "active"
 	PipelineFieldAnnotations          = "annotations"
 	PipelineFieldCreated              = "created"
 	PipelineFieldCreatorID            = "creatorId"
 	PipelineFieldCronTrigger          = "cronTrigger"
 	PipelineFieldDisplayName          = "displayName"
-	PipelineFieldEnableTrigger        = "enableTrigger"
 	PipelineFieldLabels               = "labels"
 	PipelineFieldName                 = "name"
 	PipelineFieldNamespaceId          = "namespaceId"
@@ -28,12 +28,12 @@ const (
 
 type Pipeline struct {
 	types.Resource
+	Active               *bool             `json:"active,omitempty"`
 	Annotations          map[string]string `json:"annotations,omitempty"`
 	Created              string            `json:"created,omitempty"`
 	CreatorID            string            `json:"creatorId,omitempty"`
 	CronTrigger          *CronTrigger      `json:"cronTrigger,omitempty"`
 	DisplayName          string            `json:"displayName,omitempty"`
-	EnableTrigger        *bool             `json:"enableTrigger,omitempty"`
 	Labels               map[string]string `json:"labels,omitempty"`
 	Name                 string            `json:"name,omitempty"`
 	NamespaceId          string            `json:"namespaceId,omitempty"`
