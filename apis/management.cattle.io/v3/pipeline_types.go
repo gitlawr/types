@@ -15,14 +15,14 @@ const (
 	TriggerTypeManual  = "manual"
 	TriggerTypeWebhook = "webhook"
 
-	StatusWaiting  = "Waiting"
-	StatusBuilding = "Building"
-	StatusSuccess  = "Success"
-	StatusFail     = "Fail"
-	StatusSkip     = "Skipped"
-	StatusAbort    = "Abort"
-	StatusPending  = "Pending"
-	StatusDenied   = "Denied"
+	StateWaiting  = "Waiting"
+	StateBuilding = "Building"
+	StateSuccess  = "Success"
+	StateFail     = "Fail"
+	StateSkip     = "Skipped"
+	StateAbort    = "Abort"
+	StatePending  = "Pending"
+	StateDenied   = "Denied"
 )
 
 type ClusterPipeline struct {
@@ -123,7 +123,7 @@ type PipelineCondition struct {
 type PipelineStatus struct {
 	NextRunNumber int    `json:"nextRunNumber" yaml:"nextRunNumber,omitempty" norman:"default=1,min=1"`
 	LastRunId     string `json:"lastRunId,omitempty" yaml:"lastRunId,omitempty"`
-	LastRunStatus string `json:"lastRunStatus,omitempty" yaml:"lastRunStatus,omitempty"`
+	LastRunState  string `json:"lastRunState,omitempty" yaml:"lastRunState,omitempty"`
 	LastRunTime   int64  `json:"lastRunTime,omitempty" yaml:"lastRunTime,omitempty"`
 	NextRunTime   int64  `json:"nextRunTime,omitempty" yaml:"nextRunTime,omitempty"`
 	WebHookId     string `json:"webhookId,omitempty" yaml:"webhookId,omitempty"`
@@ -153,9 +153,10 @@ type Stage struct {
 type Step struct {
 	Type string `json:"type,omitempty" yaml:"type,omitempty" norman:"required,options=runscript|buildimage,default=runscript"`
 
-	SourceCodeStepConfig *SourceCodeStepConfig
-	RunScriptStepConfig  *RunScriptStepConfig
-	BuildImageStepConfig *BuildImageStepConfig
+	SourceCodeStepConfig *SourceCodeStepConfig `json:"sourceCodeStepConfig,omitempty" yaml:"sourceCodeStepConfig,omitempty"`
+	RunScriptStepConfig  *RunScriptStepConfig  `json:"runScriptStepConfig,omitempty" yaml:"runScriptStepConfig,omitempty"`
+	BuildImageStepConfig *BuildImageStepConfig `json:"buildImageStepConfig,omitempty" yaml:"buildImageStepConfig,omitempty"`
+	PushImageStepConfig  *PushImageStepConfig  `json:"pushImageStepConfig,omitempty" yaml:"pushImageStepConfig,omitempty"`
 
 	//Step timeout in minutes
 	Timeout int `json:"timeout,omitempty" yaml:"timeout,omitempty"`
@@ -178,8 +179,11 @@ type RunScriptStepConfig struct {
 type BuildImageStepConfig struct {
 	DockerfilePath string `json:"dockerFilePath,omittempty" yaml:"dockerFilePath,omitempty" norman:"required,default=./Dockerfile"`
 	BuildPath      string `json:"buildPath,omitempty" yaml:"buildPath,omitempty" norman:"required,default=."`
-	TargetImage    string `json:"targetImage,omitempty" yaml:"targetImage,omitempty" norman:"required,default=${CICD_GIT_REPOSITORY_NAME}:${CICD_GIT_BRANCH}"`
-	Push           bool   `json:"push" yaml:"push,omitempty"`
+	ImageTag       string `json:"imageTag,omitempty" yaml:"imageTag,omitempty" norman:"required,default=${CICD_GIT_REPOSITORY_NAME}:${CICD_GIT_BRANCH}"`
+}
+
+type PushImageStepConfig struct {
+	ImageTag string `json:"imageTag,omitempty" yaml:"imageTag,omitempty" norman:"required,default=${CICD_GIT_REPOSITORY_NAME}:${CICD_GIT_BRANCH}"`
 }
 
 type PipelineHistorySpec struct {
@@ -194,21 +198,21 @@ type PipelineHistorySpec struct {
 type PipelineHistoryStatus struct {
 	CommitInfo  string            `json:"commitInfo,omitempty"`
 	EnvVars     map[string]string `json:"envVars,omitempty"`
-	Status      string            `json:"status,omitempty"`
+	State       string            `json:"state,omitempty"`
 	StartTime   int64             `json:"startTime,omitempty"`
 	EndTime     int64             `json:"endTime,omitempty"`
 	StageStatus []StageStatus     `json:"stageStatus,omitempty"`
 }
 
 type StageStatus struct {
-	Status     string       `json:"status,omitempty"`
+	State      string       `json:"state,omitempty"`
 	StartTime  int64        `json:"startTime,omitempty"`
 	EndTime    int64        `json:"endTime,omitempty"`
 	StepStatus []StepStatus `json:"stepStatus,omitempty"`
 }
 
 type StepStatus struct {
-	Status    string `json:"status,omitempty"`
+	State     string `json:"state,omitempty"`
 	StartTime int64  `json:"startTime,omitempty"`
 	EndTime   int64  `json:"endTime,omitempty"`
 }
