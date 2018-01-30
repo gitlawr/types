@@ -3,7 +3,7 @@ package client
 const (
 	PipelineStatusType               = "pipelineStatus"
 	PipelineStatusFieldLastRunId     = "lastRunId"
-	PipelineStatusFieldLastRunStatus = "lastRunStatus"
+	PipelineStatusFieldLastRunState  = "lastRunState"
 	PipelineStatusFieldLastRunTime   = "lastRunTime"
 	PipelineStatusFieldNextRunNumber = "nextRunNumber"
 	PipelineStatusFieldNextRunTime   = "nextRunTime"
@@ -13,7 +13,7 @@ const (
 
 type PipelineStatus struct {
 	LastRunId     string `json:"lastRunId,omitempty"`
-	LastRunStatus string `json:"lastRunStatus,omitempty"`
+	LastRunState  string `json:"lastRunState,omitempty"`
 	LastRunTime   *int64 `json:"lastRunTime,omitempty"`
 	NextRunNumber *int64 `json:"nextRunNumber,omitempty"`
 	NextRunTime   *int64 `json:"nextRunTime,omitempty"`

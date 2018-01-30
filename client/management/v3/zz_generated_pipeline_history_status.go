@@ -7,7 +7,7 @@ const (
 	PipelineHistoryStatusFieldEnvVars     = "envVars"
 	PipelineHistoryStatusFieldStageStatus = "stageStatus"
 	PipelineHistoryStatusFieldStartTime   = "startTime"
-	PipelineHistoryStatusFieldStatus      = "status"
+	PipelineHistoryStatusFieldState       = "state"
 )
 
 type PipelineHistoryStatus struct {
@@ -16,5 +16,5 @@ type PipelineHistoryStatus struct {
 	EnvVars     map[string]string `json:"envVars,omitempty"`
 	StageStatus []StageStatus     `json:"stageStatus,omitempty"`
 	StartTime   *int64            `json:"startTime,omitempty"`
-	Status      string            `json:"status,omitempty"`
+	State       string            `json:"state,omitempty"`
 }

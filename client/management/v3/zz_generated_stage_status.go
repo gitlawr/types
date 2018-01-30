@@ -4,13 +4,13 @@ const (
 	StageStatusType            = "stageStatus"
 	StageStatusFieldEndTime    = "endTime"
 	StageStatusFieldStartTime  = "startTime"
-	StageStatusFieldStatus     = "status"
+	StageStatusFieldState      = "state"
 	StageStatusFieldStepStatus = "stepStatus"
 )
 
 type StageStatus struct {
 	EndTime    *int64       `json:"endTime,omitempty"`
 	StartTime  *int64       `json:"startTime,omitempty"`
-	Status     string       `json:"status,omitempty"`
+	State      string       `json:"state,omitempty"`
 	StepStatus []StepStatus `json:"stepStatus,omitempty"`
 }
