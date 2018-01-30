@@ -95,6 +95,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&RemoteAccountList{},
 		&GitRepoCache{},
 		&GitRepoCacheList{},
+		&PipelineLog{},
+		&PipelineLogList{},
 		&ListenConfig{},
 		&ListenConfigList{},
 		&Setting{},

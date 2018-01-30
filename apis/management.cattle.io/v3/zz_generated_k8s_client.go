@@ -45,6 +45,7 @@ type Interface interface {
 	PipelineHistoriesGetter
 	RemoteAccountsGetter
 	GitRepoCachesGetter
+	PipelineLogsGetter
 	ListenConfigsGetter
 	SettingsGetter
 }
@@ -85,6 +86,7 @@ type Client struct {
 	pipelineHistoryControllers            map[string]PipelineHistoryController
 	remoteAccountControllers              map[string]RemoteAccountController
 	gitRepoCacheControllers               map[string]GitRepoCacheController
+	pipelineLogControllers                map[string]PipelineLogController
 	listenConfigControllers               map[string]ListenConfigController
 	settingControllers                    map[string]SettingController
 }
@@ -134,6 +136,7 @@ func NewForConfig(config rest.Config) (Interface, error) {
 		pipelineHistoryControllers:            map[string]PipelineHistoryController{},
 		remoteAccountControllers:              map[string]RemoteAccountController{},
 		gitRepoCacheControllers:               map[string]GitRepoCacheController{},
+		pipelineLogControllers:                map[string]PipelineLogController{},
 		listenConfigControllers:               map[string]ListenConfigController{},
 		settingControllers:                    map[string]SettingController{},
 	}, nil
@@ -548,6 +551,19 @@ type GitRepoCachesGetter interface {
 func (c *Client) GitRepoCaches(namespace string) GitRepoCacheInterface {
 	objectClient := clientbase.NewObjectClient(namespace, c.restClient, &GitRepoCacheResource, GitRepoCacheGroupVersionKind, gitRepoCacheFactory{})
 	return &gitRepoCacheClient{
+		ns:           namespace,
+		client:       c,
+		objectClient: objectClient,
+	}
+}
+
+type PipelineLogsGetter interface {
+	PipelineLogs(namespace string) PipelineLogInterface
+}
+
+func (c *Client) PipelineLogs(namespace string) PipelineLogInterface {
+	objectClient := clientbase.NewObjectClient(namespace, c.restClient, &PipelineLogResource, PipelineLogGroupVersionKind, pipelineLogFactory{})
+	return &pipelineLogClient{
 		ns:           namespace,
 		client:       c,
 		objectClient: objectClient,
