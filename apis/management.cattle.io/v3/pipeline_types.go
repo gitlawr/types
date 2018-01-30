@@ -147,6 +147,7 @@ type Triggers struct {
 type WebhookTrigger struct {
 	Active bool `json:"active,omitempty" yaml:"active,omitempty"norman:"default=true"`
 }
+
 type CronTrigger struct {
 	Active   bool   `json:"active,omitempty" yaml:"active,omitempty"norman:"default=true"`
 	Timezone string `json:"timezone,omitempty" yaml:"timezone,omitempty"`
@@ -159,7 +160,7 @@ type Stage struct {
 }
 
 type Step struct {
-	Type string `json:"type,omitempty" yaml:"type,omitempty" norman:"required,options=runscript|buildimage,default=runscript"`
+	Type string `json:"type,omitempty" yaml:"type,omitempty" norman:"required,options=sourcecode|runscript|buildimage|pushimage,default=runscript"`
 
 	SourceCodeStepConfig *SourceCodeStepConfig `json:"sourceCodeStepConfig,omitempty" yaml:"sourceCodeStepConfig,omitempty"`
 	RunScriptStepConfig  *RunScriptStepConfig  `json:"runScriptStepConfig,omitempty" yaml:"runScriptStepConfig,omitempty"`

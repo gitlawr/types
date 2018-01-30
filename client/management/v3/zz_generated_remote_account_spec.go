@@ -3,7 +3,7 @@ package client
 const (
 	RemoteAccountSpecType             = "remoteAccountSpec"
 	RemoteAccountSpecFieldAccessToken = "accessToken"
-	RemoteAccountSpecFieldAccountName = "accountId"
+	RemoteAccountSpecFieldAccountName = "accountName"
 	RemoteAccountSpecFieldAvatarURL   = "avatarUrl"
 	RemoteAccountSpecFieldDisplayName = "displayName"
 	RemoteAccountSpecFieldHTMLURL     = "htmlUrl"
@@ -13,7 +13,7 @@ const (
 
 type RemoteAccountSpec struct {
 	AccessToken string `json:"accessToken,omitempty"`
-	AccountName string `json:"accountId,omitempty"`
+	AccountName string `json:"accountName,omitempty"`
 	AvatarURL   string `json:"avatarUrl,omitempty"`
 	DisplayName string `json:"displayName,omitempty"`
 	HTMLURL     string `json:"htmlUrl,omitempty"`

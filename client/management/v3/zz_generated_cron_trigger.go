@@ -1,14 +1,14 @@
 package client
 
 const (
-	CronTriggerType                 = "cronTrigger"
-	CronTriggerFieldSpec            = "spec"
-	CronTriggerFieldTimezone        = "timezone"
-	CronTriggerFieldTriggerOnUpdate = "triggerOnUpdate"
+	CronTriggerType          = "cronTrigger"
+	CronTriggerFieldActive   = "active"
+	CronTriggerFieldSpec     = "spec"
+	CronTriggerFieldTimezone = "timezone"
 )
 
 type CronTrigger struct {
-	Spec            string `json:"spec,omitempty"`
-	Timezone        string `json:"timezone,omitempty"`
-	TriggerOnUpdate *bool  `json:"triggerOnUpdate,omitempty"`
+	Active   *bool  `json:"active,omitempty"`
+	Spec     string `json:"spec,omitempty"`
+	Timezone string `json:"timezone,omitempty"`
 }

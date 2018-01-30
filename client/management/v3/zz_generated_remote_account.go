@@ -7,7 +7,7 @@ import (
 const (
 	RemoteAccountType                      = "remoteAccount"
 	RemoteAccountFieldAccessToken          = "accessToken"
-	RemoteAccountFieldAccountName          = "accountId"
+	RemoteAccountFieldAccountName          = "accountName"
 	RemoteAccountFieldAnnotations          = "annotations"
 	RemoteAccountFieldAvatarURL            = "avatarUrl"
 	RemoteAccountFieldCreated              = "created"
@@ -31,7 +31,7 @@ const (
 type RemoteAccount struct {
 	types.Resource
 	AccessToken          string               `json:"accessToken,omitempty"`
-	AccountName          string               `json:"accountId,omitempty"`
+	AccountName          string               `json:"accountName,omitempty"`
 	Annotations          map[string]string    `json:"annotations,omitempty"`
 	AvatarURL            string               `json:"avatarUrl,omitempty"`
 	Created              string               `json:"created,omitempty"`

@@ -10,7 +10,6 @@ const (
 	PipelineFieldAnnotations          = "annotations"
 	PipelineFieldCreated              = "created"
 	PipelineFieldCreatorID            = "creatorId"
-	PipelineFieldCronTrigger          = "cronTrigger"
 	PipelineFieldDisplayName          = "displayName"
 	PipelineFieldLabels               = "labels"
 	PipelineFieldName                 = "name"
@@ -23,6 +22,7 @@ const (
 	PipelineFieldStatus               = "status"
 	PipelineFieldTransitioning        = "transitioning"
 	PipelineFieldTransitioningMessage = "transitioningMessage"
+	PipelineFieldTriggers             = "triggers"
 	PipelineFieldUuid                 = "uuid"
 )
 
@@ -32,7 +32,6 @@ type Pipeline struct {
 	Annotations          map[string]string `json:"annotations,omitempty"`
 	Created              string            `json:"created,omitempty"`
 	CreatorID            string            `json:"creatorId,omitempty"`
-	CronTrigger          *CronTrigger      `json:"cronTrigger,omitempty"`
 	DisplayName          string            `json:"displayName,omitempty"`
 	Labels               map[string]string `json:"labels,omitempty"`
 	Name                 string            `json:"name,omitempty"`
@@ -45,6 +44,7 @@ type Pipeline struct {
 	Status               *PipelineStatus   `json:"status,omitempty"`
 	Transitioning        string            `json:"transitioning,omitempty"`
 	TransitioningMessage string            `json:"transitioningMessage,omitempty"`
+	Triggers             *Triggers         `json:"triggers,omitempty"`
 	Uuid                 string            `json:"uuid,omitempty"`
 }
 type PipelineCollection struct {
