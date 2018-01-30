@@ -78,11 +78,11 @@ type Pipeline struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
 	Spec   PipelineSpec   `json:"spec"`
-	Status PipelineStatus `json:"status"`
+	Status PipelineStatus `json:"status" yaml:"-"`
 }
 
 type PipelineStatus struct {
-	NextRunNumber int    `json:"nextRunNumber" yaml:"nextRunNumber,omitempty"`
+	NextRunNumber int    `json:"nextRunNumber" yaml:"nextRunNumber,omitempty" norman:"default=1,min=1"`
 	LastRunId     string `json:"lastRunId,omitempty" yaml:"lastRunId,omitempty"`
 	LastRunStatus string `json:"lastRunStatus,omitempty" yaml:"lastRunStatus,omitempty"`
 	LastRunTime   int64  `json:"lastRunTime,omitempty" yaml:"lastRunTime,omitempty"`
@@ -92,12 +92,12 @@ type PipelineStatus struct {
 }
 
 type PipelineSpec struct {
-	ProjectName string `json:"projectName" norman:"required,type=reference[project]"`
+	ProjectName string `json:"projectName" yaml:"projectName" norman:"required,type=reference[project]"`
 
-	EnableTrigger bool        `json:"enableTrigger,omitempty" norman:"default=true"`
-	DisplayName   string      `json:"displayName,omitempty" norman:"required"`
-	CronTrigger   CronTrigger `json:"cronTrigger,omitempty" yaml:"cronTrigger,omitempty"`
-	Stages        []Stage     `json:"stages,omitempty" yaml:"stages,omitempty" norman:"required"`
+	Active      bool        `json:"active,omitempty" yaml:"active,omitempty"norman:"default=true"`
+	DisplayName string      `json:"displayName,omitempty" yaml:"displayName,omitempty" norman:"required"`
+	CronTrigger CronTrigger `json:"cronTrigger,omitempty" yaml:"cronTrigger,omitempty"`
+	Stages      []Stage     `json:"stages,omitempty" yaml:"stages,omitempty" norman:"required"`
 }
 
 type CronTrigger struct {
@@ -123,13 +123,13 @@ type Step struct {
 }
 
 type SourceCodeStepConfig struct {
-	Repository string `json:"repository,omitempty" yaml:"repository,omitempty" norman:"required"`
-	Branch     string `json:"branch,omitempty" yaml:"branch,omitempty" norman:"required"`
-	RemoteUser string `json:"remoteUser,omitempty" yaml:"remoteUser,omitempty" norman:"required,type=reference[remoteuser]"`
+	Repository        string `json:"repository,omitempty" yaml:"repository,omitempty" norman:"required"`
+	Branch            string `json:"branch,omitempty" yaml:"branch,omitempty" norman:"required"`
+	RemoteAccountName string `json:"remoteAccountName,omitempty" yaml:"remoteAccountName,omitempty" norman:"required,type=reference[remoteaccount]"`
 }
 
 type RunScriptStepConfig struct {
-	Image       string   `json:"image,omitempty" yaml:"image,omitempty"`
+	Image       string   `json:"image,omitempty" yaml:"image,omitempty" norman:"required"`
 	ShellScript string   `json:"shellScript,omitempty" yaml:"shellScript,omitempty"`
 	Entrypoint  string   `json:"entrypoint,omitempty" yaml:"enrtypoint,omitempty"`
 	Args        string   `json:"args,omitempty" yaml:"args,omitempty"`
@@ -137,9 +137,9 @@ type RunScriptStepConfig struct {
 }
 
 type BuildImageStepConfig struct {
-	DockerfilePath string `json:"dockerFilePath,omittempty" yaml:"dockerFilePath,omitempty"`
-	BuildPath      string `json:"buildPath,omitempty" yaml:"buildPath,omitempty"`
-	TargetImage    string `json:"targetImage,omitempty" yaml:"targetImage,omitempty"`
+	DockerfilePath string `json:"dockerFilePath,omittempty" yaml:"dockerFilePath,omitempty" norman:"required,default=./Dockerfile"`
+	BuildPath      string `json:"buildPath,omitempty" yaml:"buildPath,omitempty" norman:"required,default=."`
+	TargetImage    string `json:"targetImage,omitempty" yaml:"targetImage,omitempty" norman:"required,default=${CICD_GIT_REPOSITORY_NAME}:${CICD_GIT_BRANCH}"`
 	Push           bool   `json:"push" yaml:"push,omitempty"`
 }
 
