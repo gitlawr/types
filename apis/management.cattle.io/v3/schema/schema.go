@@ -235,6 +235,7 @@ func pipelineTypes(schema *types.Schemas) *types.Schemas {
 		AddMapperForType(&Version, &v3.RemoteAccount{},
 			m.DisplayName{}).
 		AddMapperForType(&Version, &v3.GitRepoCache{}).
+		AddMapperForType(&Version, &v3.PipelineLog{}).
 		MustImport(&Version, v3.ClusterPipeline{}).
 		MustImportAndCustomize(&Version, v3.Pipeline{}, func(schema *types.Schema) {
 
@@ -256,6 +257,8 @@ func pipelineTypes(schema *types.Schemas) *types.Schemas {
 			schema.CollectionActions = map[string]types.Action{
 				"refreshrepos": {},
 			}
-		}).MustImport(&Version, v3.GitRepoCache{})
+		}).
+		MustImport(&Version, v3.GitRepoCache{}).
+		MustImport(&Version, v3.PipelineLog{})
 
 }

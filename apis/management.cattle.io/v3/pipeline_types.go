@@ -35,6 +35,55 @@ type ClusterPipeline struct {
 	Status ClusterPipelineStatus `json:"status"`
 }
 
+type Pipeline struct {
+	types.Namespaced
+
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+
+	Spec   PipelineSpec   `json:"spec"`
+	Status PipelineStatus `json:"status" yaml:"-"`
+}
+
+type PipelineHistory struct {
+	types.Namespaced
+
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+
+	Spec   PipelineHistorySpec   `json:"spec"`
+	Status PipelineHistoryStatus `json:"status"`
+}
+
+type PipelineLog struct {
+	types.Namespaced
+
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+
+	Spec PipelineLogSpec `json:"spec"`
+}
+
+type RemoteAccount struct {
+	types.Namespaced
+
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+
+	Spec   RemoteAccountSpec   `json:"spec"`
+	Status RemoteAccountStatus `json:"status"`
+}
+
+type GitRepoCache struct {
+	types.Namespaced
+
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+
+	Spec   GitRepoCacheSpec   `json:"spec"`
+	Status GitRepoCacheStatus `json:"status"`
+}
+
 type ClusterPipelineSpec struct {
 	ClusterName  string        `json:"clusterName" norman:"type=reference[cluster]"`
 	GibhubConfig *GibhubConfig `json:"githubConfig,omitempty"`
@@ -69,16 +118,6 @@ type PipelineCondition struct {
 	Reason string `json:"reason,omitempty"`
 	// Human-readable message indicating details about last transition
 	Message string `json:"message,omitempty"`
-}
-
-type Pipeline struct {
-	types.Namespaced
-
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-
-	Spec   PipelineSpec   `json:"spec"`
-	Status PipelineStatus `json:"status" yaml:"-"`
 }
 
 type PipelineStatus struct {
@@ -143,16 +182,6 @@ type BuildImageStepConfig struct {
 	Push           bool   `json:"push" yaml:"push,omitempty"`
 }
 
-type PipelineHistory struct {
-	types.Namespaced
-
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-
-	Spec   PipelineHistorySpec   `json:"spec"`
-	Status PipelineHistoryStatus `json:"status"`
-}
-
 type PipelineHistorySpec struct {
 	ProjectName string `json:"projectName" norman:"required,type=reference[project]"`
 
@@ -184,16 +213,6 @@ type StepStatus struct {
 	EndTime   int64  `json:"endTime,omitempty"`
 }
 
-type RemoteAccount struct {
-	types.Namespaced
-
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-
-	Spec   RemoteAccountSpec   `json:"spec"`
-	Status RemoteAccountStatus `json:"status"`
-}
-
 type RemoteAccountSpec struct {
 	DisplayName string `json:"displayName,omitempty" norman:"required"`
 	Type        string `json:"type,omitempty" norman:"required,options=github"`
@@ -205,16 +224,6 @@ type RemoteAccountSpec struct {
 }
 
 type RemoteAccountStatus struct {
-}
-
-type GitRepoCache struct {
-	types.Namespaced
-
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-
-	Spec   GitRepoCacheSpec   `json:"spec"`
-	Status GitRepoCacheStatus `json:"status"`
 }
 
 type GitRepoCacheSpec struct {
@@ -237,4 +246,13 @@ type RepoPerm struct {
 	Pull  bool `json:"pull,omitempty"`
 	Push  bool `json:"push,omitempty"`
 	Admin bool `json:"admin,omitempty"`
+}
+
+type PipelineLogSpec struct {
+	ProjectName string `json:"projectName" yaml:"projectName" norman:"required,type=reference[project]"`
+
+	PipelineHistoryName string `json:"pipelineHistoryName,omitempty" norman:"type=reference[pipelinehistory]`
+	StageOrdinal        int    `json:"stageOrdinal,omitempty" norman:"min=1"`
+	StepOrdinal         int    `json:"stepOrdinal,omitempty" norman:"min=1"`
+	Message             string `json:"message,omitempty"`
 }
