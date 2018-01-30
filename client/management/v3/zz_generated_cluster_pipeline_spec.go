@@ -3,10 +3,10 @@ package client
 const (
 	ClusterPipelineSpecType              = "clusterPipelineSpec"
 	ClusterPipelineSpecFieldClusterId    = "clusterId"
-	ClusterPipelineSpecFieldGibhubConfig = "githubConfig"
+	ClusterPipelineSpecFieldGithubConfig = "githubConfig"
 )
 
 type ClusterPipelineSpec struct {
 	ClusterId    string        `json:"clusterId,omitempty"`
-	GibhubConfig *GibhubConfig `json:"githubConfig,omitempty"`
+	GithubConfig *GithubConfig `json:"githubConfig,omitempty"`
 }
