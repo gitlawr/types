@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	StepTypeSCM        = "scm"
+	StepTypeSourceCode = "sourceCode"
 	StepTypeRunScript  = "runScript"
 	StepTypeBuildImage = "buildImage"
 	TriggerTypeCron    = "cron"
@@ -133,16 +133,24 @@ type PipelineStatus struct {
 type PipelineSpec struct {
 	ProjectName string `json:"projectName" yaml:"projectName" norman:"required,type=reference[project]"`
 
-	Active      bool        `json:"active,omitempty" yaml:"active,omitempty"norman:"default=true"`
-	DisplayName string      `json:"displayName,omitempty" yaml:"displayName,omitempty" norman:"required"`
-	CronTrigger CronTrigger `json:"cronTrigger,omitempty" yaml:"cronTrigger,omitempty"`
-	Stages      []Stage     `json:"stages,omitempty" yaml:"stages,omitempty" norman:"required"`
+	Active      bool     `json:"active,omitempty" yaml:"active,omitempty" norman:"default=true"`
+	DisplayName string   `json:"displayName,omitempty" yaml:"displayName,omitempty" norman:"required"`
+	Triggers    Triggers `json:"triggers,omitempty" yaml:"triggers,omitempty"`
+	Stages      []Stage  `json:"stages,omitempty" yaml:"stages,omitempty" norman:"required"`
 }
 
+type Triggers struct {
+	WebhookTrigger *WebhookTrigger `json:"webhookTrigger,omitempty" yaml:"webhookTrigger,omitempty"`
+	CronTrigger    *CronTrigger    `json:"cronTrigger,omitempty" yaml:"cronTrigger,omitempty"`
+}
+
+type WebhookTrigger struct {
+	Active bool `json:"active,omitempty" yaml:"active,omitempty"norman:"default=true"`
+}
 type CronTrigger struct {
-	Timezone        string `json:"timezone,omitempty" yaml:"timezone,omitempty"`
-	Spec            string `json:"spec,omitempty" yaml:"spec,omitempty"`
-	TriggerOnUpdate bool   `json:"triggerOnUpdate" yaml:"triggerOnUpdate,omitempty"`
+	Active   bool   `json:"active,omitempty" yaml:"active,omitempty"norman:"default=true"`
+	Timezone string `json:"timezone,omitempty" yaml:"timezone,omitempty"`
+	Spec     string `json:"spec,omitempty" yaml:"spec,omitempty"`
 }
 
 type Stage struct {
@@ -223,7 +231,7 @@ type RemoteAccountSpec struct {
 	UserName    string `json:"userName,omitempty" norman:"required,type=reference[user]"`
 	AvatarURL   string `json:"avatarUrl,omitempty"`
 	HTMLURL     string `json:"htmlUrl,omitempty"`
-	AccountName string `json:"accountId,omitempty"`
+	AccountName string `json:"accountName,omitempty"`
 	AccessToken string `json:"accessToken,omitempty"`
 }
 
