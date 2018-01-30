@@ -86,14 +86,14 @@ type GitRepoCache struct {
 
 type ClusterPipelineSpec struct {
 	ClusterName  string        `json:"clusterName" norman:"type=reference[cluster]"`
-	GibhubConfig *GibhubConfig `json:"githubConfig,omitempty"`
+	GithubConfig *GithubConfig `json:"githubConfig,omitempty"`
 }
 
 type ClusterPipelineStatus struct {
 	Conditions []PipelineCondition `json:"conditions,omitempty"`
 }
 
-type GibhubConfig struct {
+type GithubConfig struct {
 	Scheme       string `json:"githubConfig,omitempty"`
 	Host         string `json:"host,omitempty"`
 	ClientId     string `json:"clientId,omitempty"`
