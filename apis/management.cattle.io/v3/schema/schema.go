@@ -240,6 +240,7 @@ func pipelineTypes(schema *types.Schemas) *types.Schemas {
 			schema.ResourceActions = map[string]types.Action{
 				"deploy":  {},
 				"destroy": {},
+				"auth":    {},
 			}
 		}).
 		MustImportAndCustomize(&Version, v3.Pipeline{}, func(schema *types.Schema) {
@@ -257,9 +258,6 @@ func pipelineTypes(schema *types.Schemas) *types.Schemas {
 			}
 		}).
 		MustImportAndCustomize(&Version, v3.RemoteAccount{}, func(schema *types.Schema) {
-			schema.CollectionActions = map[string]types.Action{
-				"oauth": {},
-			}
 			schema.ResourceActions = map[string]types.Action{
 				"refreshrepos": {},
 			}
