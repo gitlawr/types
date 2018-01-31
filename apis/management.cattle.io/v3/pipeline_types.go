@@ -65,8 +65,6 @@ type PipelineLog struct {
 }
 
 type RemoteAccount struct {
-	types.Namespaced
-
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
@@ -75,8 +73,6 @@ type RemoteAccount struct {
 }
 
 type GitRepoCache struct {
-	types.Namespaced
-
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
@@ -242,6 +238,7 @@ type RemoteAccountStatus struct {
 
 type GitRepoCacheSpec struct {
 	Type              string          `json:"type,omitempty" norman:"required,options=github"`
+	UserName          string          `json:"userName,omitempty" norman:"required,type=reference[user]"`
 	RemoteAccountName string          `json:"remoteAccountName,omitempty" norman:"required,type=reference[remoteaccount]`
 	Repositories      []GitRepository `json:"repositories,omitempty"`
 }
