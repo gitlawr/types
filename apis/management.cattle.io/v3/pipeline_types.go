@@ -65,6 +65,8 @@ type PipelineLog struct {
 }
 
 type RemoteAccount struct {
+	types.Namespaced
+
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
@@ -73,6 +75,8 @@ type RemoteAccount struct {
 }
 
 type GitRepoCache struct {
+	types.Namespaced
+
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
