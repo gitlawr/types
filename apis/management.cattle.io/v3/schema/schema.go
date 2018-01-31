@@ -236,9 +236,13 @@ func pipelineTypes(schema *types.Schemas) *types.Schemas {
 			m.DisplayName{}).
 		AddMapperForType(&Version, &v3.GitRepoCache{}).
 		AddMapperForType(&Version, &v3.PipelineLog{}).
-		MustImport(&Version, v3.ClusterPipeline{}).
+		MustImportAndCustomize(&Version, v3.ClusterPipeline{}, func(schema *types.Schema) {
+			schema.ResourceActions = map[string]types.Action{
+				"deploy":  {},
+				"destroy": {},
+			}
+		}).
 		MustImportAndCustomize(&Version, v3.Pipeline{}, func(schema *types.Schema) {
-
 			schema.ResourceActions = map[string]types.Action{
 				"activate":   {},
 				"deactivate": {},
@@ -247,7 +251,6 @@ func pipelineTypes(schema *types.Schemas) *types.Schemas {
 			}
 		}).
 		MustImportAndCustomize(&Version, v3.PipelineHistory{}, func(schema *types.Schema) {
-
 			schema.ResourceActions = map[string]types.Action{
 				"stop":  {},
 				"rerun": {},

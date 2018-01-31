@@ -86,6 +86,7 @@ type GitRepoCache struct {
 
 type ClusterPipelineSpec struct {
 	ClusterName  string        `json:"clusterName" norman:"type=reference[cluster]"`
+	Deploy       bool          `json:"deploy"`
 	GithubConfig *GithubConfig `json:"githubConfig,omitempty"`
 }
 
