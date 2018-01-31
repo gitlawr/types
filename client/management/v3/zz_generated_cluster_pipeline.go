@@ -10,6 +10,7 @@ const (
 	ClusterPipelineFieldClusterId            = "clusterId"
 	ClusterPipelineFieldCreated              = "created"
 	ClusterPipelineFieldCreatorID            = "creatorId"
+	ClusterPipelineFieldDeploy               = "deploy"
 	ClusterPipelineFieldGithubConfig         = "githubConfig"
 	ClusterPipelineFieldLabels               = "labels"
 	ClusterPipelineFieldName                 = "name"
@@ -29,6 +30,7 @@ type ClusterPipeline struct {
 	ClusterId            string                 `json:"clusterId,omitempty"`
 	Created              string                 `json:"created,omitempty"`
 	CreatorID            string                 `json:"creatorId,omitempty"`
+	Deploy               *bool                  `json:"deploy,omitempty"`
 	GithubConfig         *GithubConfig          `json:"githubConfig,omitempty"`
 	Labels               map[string]string      `json:"labels,omitempty"`
 	Name                 string                 `json:"name,omitempty"`
