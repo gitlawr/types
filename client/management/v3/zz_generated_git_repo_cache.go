@@ -11,7 +11,6 @@ const (
 	GitRepoCacheFieldCreatorID            = "creatorId"
 	GitRepoCacheFieldLabels               = "labels"
 	GitRepoCacheFieldName                 = "name"
-	GitRepoCacheFieldNamespaceId          = "namespaceId"
 	GitRepoCacheFieldOwnerReferences      = "ownerReferences"
 	GitRepoCacheFieldRemoteAccountName    = "remoteAccountName"
 	GitRepoCacheFieldRemoved              = "removed"
@@ -21,6 +20,7 @@ const (
 	GitRepoCacheFieldTransitioning        = "transitioning"
 	GitRepoCacheFieldTransitioningMessage = "transitioningMessage"
 	GitRepoCacheFieldType                 = "type"
+	GitRepoCacheFieldUserId               = "userId"
 	GitRepoCacheFieldUuid                 = "uuid"
 )
 
@@ -31,7 +31,6 @@ type GitRepoCache struct {
 	CreatorID            string              `json:"creatorId,omitempty"`
 	Labels               map[string]string   `json:"labels,omitempty"`
 	Name                 string              `json:"name,omitempty"`
-	NamespaceId          string              `json:"namespaceId,omitempty"`
 	OwnerReferences      []OwnerReference    `json:"ownerReferences,omitempty"`
 	RemoteAccountName    string              `json:"remoteAccountName,omitempty"`
 	Removed              string              `json:"removed,omitempty"`
@@ -41,6 +40,7 @@ type GitRepoCache struct {
 	Transitioning        string              `json:"transitioning,omitempty"`
 	TransitioningMessage string              `json:"transitioningMessage,omitempty"`
 	Type                 string              `json:"type,omitempty"`
+	UserId               string              `json:"userId,omitempty"`
 	Uuid                 string              `json:"uuid,omitempty"`
 }
 type GitRepoCacheCollection struct {
