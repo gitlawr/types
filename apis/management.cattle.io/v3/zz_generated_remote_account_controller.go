@@ -23,8 +23,9 @@ var (
 	RemoteAccountResource = metav1.APIResource{
 		Name:         "remoteaccounts",
 		SingularName: "remoteaccount",
-		Namespaced:   false,
-		Kind:         RemoteAccountGroupVersionKind.Kind,
+		Namespaced:   true,
+
+		Kind: RemoteAccountGroupVersionKind.Kind,
 	}
 )
 
