@@ -21,7 +21,7 @@ const (
 	GitRepoCacheFieldTransitioning        = "transitioning"
 	GitRepoCacheFieldTransitioningMessage = "transitioningMessage"
 	GitRepoCacheFieldType                 = "type"
-	GitRepoCacheFieldUserId               = "userId"
+	GitRepoCacheFieldUserID               = "userId"
 	GitRepoCacheFieldUuid                 = "uuid"
 )
 
@@ -42,7 +42,7 @@ type GitRepoCache struct {
 	Transitioning        string              `json:"transitioning,omitempty"`
 	TransitioningMessage string              `json:"transitioningMessage,omitempty"`
 	Type                 string              `json:"type,omitempty"`
-	UserId               string              `json:"userId,omitempty"`
+	UserID               string              `json:"userId,omitempty"`
 	Uuid                 string              `json:"uuid,omitempty"`
 }
 type GitRepoCacheCollection struct {

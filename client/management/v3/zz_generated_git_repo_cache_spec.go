@@ -5,12 +5,12 @@ const (
 	GitRepoCacheSpecFieldRemoteAccountName = "remoteAccountName"
 	GitRepoCacheSpecFieldRepositories      = "repositories"
 	GitRepoCacheSpecFieldType              = "type"
-	GitRepoCacheSpecFieldUserId            = "userId"
+	GitRepoCacheSpecFieldUserID            = "userId"
 )
 
 type GitRepoCacheSpec struct {
 	RemoteAccountName string          `json:"remoteAccountName,omitempty"`
 	Repositories      []GitRepository `json:"repositories,omitempty"`
 	Type              string          `json:"type,omitempty"`
-	UserId            string          `json:"userId,omitempty"`
+	UserID            string          `json:"userId,omitempty"`
 }

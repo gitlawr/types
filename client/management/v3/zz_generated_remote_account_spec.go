@@ -8,7 +8,7 @@ const (
 	RemoteAccountSpecFieldDisplayName = "displayName"
 	RemoteAccountSpecFieldHTMLURL     = "htmlUrl"
 	RemoteAccountSpecFieldType        = "type"
-	RemoteAccountSpecFieldUserId      = "userId"
+	RemoteAccountSpecFieldUserID      = "userId"
 )
 
 type RemoteAccountSpec struct {
@@ -18,5 +18,5 @@ type RemoteAccountSpec struct {
 	DisplayName string `json:"displayName,omitempty"`
 	HTMLURL     string `json:"htmlUrl,omitempty"`
 	Type        string `json:"type,omitempty"`
-	UserId      string `json:"userId,omitempty"`
+	UserID      string `json:"userId,omitempty"`
 }
