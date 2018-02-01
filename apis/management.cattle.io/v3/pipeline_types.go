@@ -161,7 +161,7 @@ type Stage struct {
 }
 
 type Step struct {
-	Type string `json:"type,omitempty" yaml:"type,omitempty" norman:"required,options=sourcecode|runscript|buildimage|pushimage,default=runscript"`
+	Type string `json:"type,omitempty" yaml:"type,omitempty" norman:"required,options=sourcecode|runscript|publishimage,default=runscript"`
 
 	SourceCodeStepConfig   *SourceCodeStepConfig   `json:"sourceCodeStepConfig,omitempty" yaml:"sourceCodeStepConfig,omitempty"`
 	RunScriptStepConfig    *RunScriptStepConfig    `json:"runScriptStepConfig,omitempty" yaml:"runScriptStepConfig,omitempty"`
