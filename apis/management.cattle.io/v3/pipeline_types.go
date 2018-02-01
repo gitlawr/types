@@ -161,7 +161,7 @@ type Stage struct {
 }
 
 type Step struct {
-	Type string `json:"type,omitempty" yaml:"type,omitempty" norman:"required,options=sourcecode|runscript|publishimage,default=runscript"`
+	//Type string `json:"type,omitempty" yaml:"type,omitempty" norman:"required,options=sourcecode|runscript|publishimage,default=runscript"`
 
 	SourceCodeStepConfig   *SourceCodeStepConfig   `json:"sourceCodeStepConfig,omitempty" yaml:"sourceCodeStepConfig,omitempty"`
 	RunScriptStepConfig    *RunScriptStepConfig    `json:"runScriptStepConfig,omitempty" yaml:"runScriptStepConfig,omitempty"`
@@ -224,7 +224,7 @@ type StepStatus struct {
 
 type RemoteAccountSpec struct {
 	DisplayName string `json:"displayName,omitempty" norman:"required"`
-	Type        string `json:"type,omitempty" norman:"required,options=github"`
+	//RemoteType        string `json:"remoteType,omitempty" norman:"required,options=github"`
 	UserID      string `json:"userId" norman:"type=required,type=reference[user]"`
 	AvatarURL   string `json:"avatarUrl,omitempty"`
 	HTMLURL     string `json:"htmlUrl,omitempty"`
@@ -236,7 +236,7 @@ type RemoteAccountStatus struct {
 }
 
 type GitRepoCacheSpec struct {
-	Type              string          `json:"type,omitempty" norman:"required,options=github"`
+	RemoteType        string          `json:"remoteType,omitempty" norman:"required,options=github"`
 	UserID            string          `json:"userId" norman:"type=required,type=reference[user]"`
 	RemoteAccountName string          `json:"remoteAccountName,omitempty" norman:"required,type=reference[remoteaccount]`
 	Repositories      []GitRepository `json:"repositories,omitempty"`
