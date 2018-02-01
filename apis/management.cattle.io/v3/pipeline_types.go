@@ -65,8 +65,6 @@ type PipelineLog struct {
 }
 
 type RemoteAccount struct {
-	types.Namespaced
-
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
@@ -75,8 +73,6 @@ type RemoteAccount struct {
 }
 
 type GitRepoCache struct {
-	types.Namespaced
-
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
@@ -161,7 +157,7 @@ type Stage struct {
 }
 
 type Step struct {
-	//Type string `json:"type,omitempty" yaml:"type,omitempty" norman:"required,options=sourcecode|runscript|publishimage,default=runscript"`
+	Type string `json:"type,omitempty" yaml:"type,omitempty" norman:"required,options=sourcecode|runscript|publishimage,default=runscript"`
 
 	SourceCodeStepConfig   *SourceCodeStepConfig   `json:"sourceCodeStepConfig,omitempty" yaml:"sourceCodeStepConfig,omitempty"`
 	RunScriptStepConfig    *RunScriptStepConfig    `json:"runScriptStepConfig,omitempty" yaml:"runScriptStepConfig,omitempty"`
