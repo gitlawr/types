@@ -7,7 +7,6 @@ const (
 	RemoteAccountSpecFieldAvatarURL   = "avatarUrl"
 	RemoteAccountSpecFieldDisplayName = "displayName"
 	RemoteAccountSpecFieldHTMLURL     = "htmlUrl"
-	RemoteAccountSpecFieldType        = "type"
 	RemoteAccountSpecFieldUserID      = "userId"
 )
 
@@ -17,6 +16,5 @@ type RemoteAccountSpec struct {
 	AvatarURL   string `json:"avatarUrl,omitempty"`
 	DisplayName string `json:"displayName,omitempty"`
 	HTMLURL     string `json:"htmlUrl,omitempty"`
-	Type        string `json:"type,omitempty"`
 	UserID      string `json:"userId,omitempty"`
 }

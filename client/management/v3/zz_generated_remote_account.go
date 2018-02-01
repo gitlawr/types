@@ -23,7 +23,6 @@ const (
 	RemoteAccountFieldStatus               = "status"
 	RemoteAccountFieldTransitioning        = "transitioning"
 	RemoteAccountFieldTransitioningMessage = "transitioningMessage"
-	RemoteAccountFieldType                 = "type"
 	RemoteAccountFieldUserID               = "userId"
 	RemoteAccountFieldUuid                 = "uuid"
 )
@@ -47,7 +46,6 @@ type RemoteAccount struct {
 	Status               *RemoteAccountStatus `json:"status,omitempty"`
 	Transitioning        string               `json:"transitioning,omitempty"`
 	TransitioningMessage string               `json:"transitioningMessage,omitempty"`
-	Type                 string               `json:"type,omitempty"`
 	UserID               string               `json:"userId,omitempty"`
 	Uuid                 string               `json:"uuid,omitempty"`
 }
