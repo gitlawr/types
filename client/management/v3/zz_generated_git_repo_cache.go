@@ -11,7 +11,6 @@ const (
 	GitRepoCacheFieldCreatorID            = "creatorId"
 	GitRepoCacheFieldLabels               = "labels"
 	GitRepoCacheFieldName                 = "name"
-	GitRepoCacheFieldNamespaceId          = "namespaceId"
 	GitRepoCacheFieldOwnerReferences      = "ownerReferences"
 	GitRepoCacheFieldRemoteAccountName    = "remoteAccountName"
 	GitRepoCacheFieldRemoteType           = "remoteType"
@@ -32,7 +31,6 @@ type GitRepoCache struct {
 	CreatorID            string              `json:"creatorId,omitempty"`
 	Labels               map[string]string   `json:"labels,omitempty"`
 	Name                 string              `json:"name,omitempty"`
-	NamespaceId          string              `json:"namespaceId,omitempty"`
 	OwnerReferences      []OwnerReference    `json:"ownerReferences,omitempty"`
 	RemoteAccountName    string              `json:"remoteAccountName,omitempty"`
 	RemoteType           string              `json:"remoteType,omitempty"`
