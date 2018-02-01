@@ -225,7 +225,7 @@ type StepStatus struct {
 type RemoteAccountSpec struct {
 	DisplayName string `json:"displayName,omitempty" norman:"required"`
 	Type        string `json:"type,omitempty" norman:"required,options=github"`
-	UserID      string `json:"userId" norman:"type=required,reference[User]"`
+	UserID      string `json:"userId" norman:"type=required,type=reference[user]"`
 	AvatarURL   string `json:"avatarUrl,omitempty"`
 	HTMLURL     string `json:"htmlUrl,omitempty"`
 	AccountName string `json:"accountName,omitempty"`
@@ -237,7 +237,7 @@ type RemoteAccountStatus struct {
 
 type GitRepoCacheSpec struct {
 	Type              string          `json:"type,omitempty" norman:"required,options=github"`
-	UserID            string          `json:"userId" norman:"type=required,reference[User]"`
+	UserID            string          `json:"userId" norman:"type=required,type=reference[user]"`
 	RemoteAccountName string          `json:"remoteAccountName,omitempty" norman:"required,type=reference[remoteaccount]`
 	Repositories      []GitRepository `json:"repositories,omitempty"`
 }
