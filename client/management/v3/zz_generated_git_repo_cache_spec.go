@@ -12,5 +12,5 @@ type GitRepoCacheSpec struct {
 	RemoteAccountName string          `json:"remoteAccountName,omitempty"`
 	RemoteType        string          `json:"remoteType,omitempty"`
 	Repositories      []GitRepository `json:"repositories,omitempty"`
-	UserID            *Required       `json:"userId,omitempty"`
+	UserID            string          `json:"userId,omitempty"`
 }

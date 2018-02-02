@@ -16,7 +16,6 @@ const (
 	RemoteAccountFieldHTMLURL              = "htmlUrl"
 	RemoteAccountFieldLabels               = "labels"
 	RemoteAccountFieldName                 = "name"
-	RemoteAccountFieldNamespaceId          = "namespaceId"
 	RemoteAccountFieldOwnerReferences      = "ownerReferences"
 	RemoteAccountFieldRemoved              = "removed"
 	RemoteAccountFieldState                = "state"
@@ -39,14 +38,13 @@ type RemoteAccount struct {
 	HTMLURL              string               `json:"htmlUrl,omitempty"`
 	Labels               map[string]string    `json:"labels,omitempty"`
 	Name                 string               `json:"name,omitempty"`
-	NamespaceId          string               `json:"namespaceId,omitempty"`
 	OwnerReferences      []OwnerReference     `json:"ownerReferences,omitempty"`
 	Removed              string               `json:"removed,omitempty"`
 	State                string               `json:"state,omitempty"`
 	Status               *RemoteAccountStatus `json:"status,omitempty"`
 	Transitioning        string               `json:"transitioning,omitempty"`
 	TransitioningMessage string               `json:"transitioningMessage,omitempty"`
-	UserID               *Required            `json:"userId,omitempty"`
+	UserID               string               `json:"userId,omitempty"`
 	Uuid                 string               `json:"uuid,omitempty"`
 }
 type RemoteAccountCollection struct {
