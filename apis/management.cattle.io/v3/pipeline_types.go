@@ -65,6 +65,8 @@ type PipelineLog struct {
 }
 
 type RemoteAccount struct {
+	types.Namespaced
+
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
@@ -73,6 +75,8 @@ type RemoteAccount struct {
 }
 
 type GitRepoCache struct {
+	types.Namespaced
+
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
@@ -221,7 +225,7 @@ type StepStatus struct {
 type RemoteAccountSpec struct {
 	DisplayName string `json:"displayName,omitempty" norman:"required"`
 	//RemoteType        string `json:"remoteType,omitempty" norman:"required,options=github"`
-	UserID      string `json:"userId" norman:"type=required,type=reference[user]"`
+	UserID      string `json:"userId" norman:"type=required"` //,type=reference[user]"
 	AvatarURL   string `json:"avatarUrl,omitempty"`
 	HTMLURL     string `json:"htmlUrl,omitempty"`
 	AccountName string `json:"accountName,omitempty"`
@@ -233,7 +237,7 @@ type RemoteAccountStatus struct {
 
 type GitRepoCacheSpec struct {
 	RemoteType        string          `json:"remoteType,omitempty" norman:"required,options=github"`
-	UserID            string          `json:"userId" norman:"type=required,type=reference[user]"`
+	UserID            string          `json:"userId" norman:"type=required"` //,type=reference[user]"
 	RemoteAccountName string          `json:"remoteAccountName,omitempty" norman:"required,type=reference[remoteaccount]`
 	Repositories      []GitRepository `json:"repositories,omitempty"`
 }
