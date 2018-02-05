@@ -167,9 +167,9 @@ type Step struct {
 }
 
 type SourceCodeStepConfig struct {
-	Repository        string `json:"repository,omitempty" yaml:"repository,omitempty" norman:"required"`
-	Branch            string `json:"branch,omitempty" yaml:"branch,omitempty" norman:"required"`
-	RemoteAccountName string `json:"remoteAccountName,omitempty" yaml:"remoteAccountName,omitempty" norman:"required,type=reference[remoteaccount]"`
+	Repository        string `json:"repository,omitempty" yaml:"repository,omitempty" `
+	Branch            string `json:"branch,omitempty" yaml:"branch,omitempty" `
+	RemoteAccountName string `json:"remoteAccountName,omitempty" yaml:"remoteAccountName,omitempty" "`
 }
 
 type RunScriptStepConfig struct {
