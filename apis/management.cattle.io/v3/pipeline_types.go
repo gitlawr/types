@@ -45,14 +45,14 @@ type Pipeline struct {
 	Status PipelineStatus `json:"status" yaml:"-"`
 }
 
-type PipelineHistory struct {
+type PipelineExecution struct {
 	types.Namespaced
 
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   PipelineHistorySpec   `json:"spec"`
-	Status PipelineHistoryStatus `json:"status"`
+	Spec   PipelineExecutionSpec   `json:"spec"`
+	Status PipelineExecutionStatus `json:"status"`
 }
 
 type PipelineLog struct {
@@ -64,20 +64,20 @@ type PipelineLog struct {
 	Spec PipelineLogSpec `json:"spec"`
 }
 
-type RemoteAccount struct {
+type SourceCodeCredential struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   RemoteAccountSpec   `json:"spec"`
-	Status RemoteAccountStatus `json:"status"`
+	Spec   SourceCodeCredentialSpec   `json:"spec"`
+	Status SourceCodeCredentialStatus `json:"status"`
 }
 
-type GitRepoCache struct {
+type SourceCodeRepository struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   GitRepoCacheSpec   `json:"spec"`
-	Status GitRepoCacheStatus `json:"status"`
+	Spec   SourceCodeRepositorySpec   `json:"spec"`
+	Status SourceCodeRepositoryStatus `json:"status"`
 }
 
 type ClusterPipelineSpec struct {
@@ -91,7 +91,7 @@ type ClusterPipelineStatus struct {
 }
 
 type GithubConfig struct {
-	Scheme       string `json:"githubConfig,omitempty"`
+	tls          bool   `json:"tls,omitempty"`
 	Host         string `json:"host,omitempty"`
 	ClientId     string `json:"clientId,omitempty"`
 	ClientSecret string `json:"clientSecret,omitempty"`
@@ -132,20 +132,22 @@ type PipelineSpec struct {
 
 	Active bool `json:"active,omitempty" yaml:"active,omitempty"`
 	//DisplayName string   `json:"displayName,omitempty" yaml:"displayName,omitempty" norman:"required"`
-	Triggers Triggers `json:"triggers,omitempty" yaml:"triggers,omitempty"`
-	Stages   []Stage  `json:"stages,omitempty" yaml:"stages,omitempty" norman:"required"`
+	WebhookTrigger *TriggerWebhook `json:"triggerWebhook,omitempty" yaml:"triggerWebhook,omitempty"`
+	TriggerCron    *TriggerCron    `json:"triggerCron,omitempty" yaml:"triggerCron,omitempty"`
+
+	Stages []Stage `json:"stages,omitempty" yaml:"stages,omitempty" norman:"required"`
 }
 
 type Triggers struct {
-	WebhookTrigger *WebhookTrigger `json:"webhookTrigger,omitempty" yaml:"webhookTrigger,omitempty"`
-	CronTrigger    *CronTrigger    `json:"cronTrigger,omitempty" yaml:"cronTrigger,omitempty"`
+	WebhookTrigger *TriggerWebhook `json:"triggerWebhook,omitempty" yaml:"triggerWebhook,omitempty"`
+	CronTrigger    *TriggerCron    `json:"triggerCron,omitempty" yaml:"triggerCron,omitempty"`
 }
 
-type WebhookTrigger struct {
+type TriggerWebhook struct {
 	Active bool `json:"active,omitempty" yaml:"active,omitempty"`
 }
 
-type CronTrigger struct {
+type TriggerCron struct {
 	Active   bool   `json:"active,omitempty" yaml:"active,omitempty"`
 	Timezone string `json:"timezone,omitempty" yaml:"timezone,omitempty"`
 	Spec     string `json:"spec,omitempty" yaml:"spec,omitempty"`
@@ -159,43 +161,44 @@ type Stage struct {
 type Step struct {
 	Type string `json:"type,omitempty" yaml:"type,omitempty" norman:"required,options=sourcecode|runscript|buildimage|pushimage,default=runscript"`
 
-	SourceCodeStepConfig   *SourceCodeStepConfig   `json:"sourceCodeStepConfig,omitempty" yaml:"sourceCodeStepConfig,omitempty"`
-	RunScriptStepConfig    *RunScriptStepConfig    `json:"runScriptStepConfig,omitempty" yaml:"runScriptStepConfig,omitempty"`
-	PublishImageStepConfig *PublishImageStepConfig `json:"publishImageStepConfig,omitempty" yaml:"publishImageStepConfig,omitempty"`
+	SourceCodeStepConfig   *SourceCodeStepConfig   `json:"sourceCodeConfig,omitempty" yaml:"sourceCodeConfig,omitempty"`
+	RunScriptStepConfig    *RunScriptStepConfig    `json:"runScriptConfig,omitempty" yaml:"runScriptConfig,omitempty"`
+	PublishImageStepConfig *PublishImageStepConfig `json:"publishImageConfig,omitempty" yaml:"publishImageConfig,omitempty"`
 	//Step timeout in minutes
 	Timeout int `json:"timeout,omitempty" yaml:"timeout,omitempty"`
 }
 
 type SourceCodeStepConfig struct {
-	Repository        string `json:"repository,omitempty" yaml:"repository,omitempty" `
-	Branch            string `json:"branch,omitempty" yaml:"branch,omitempty" `
-	RemoteAccountName string `json:"remoteAccountName,omitempty" yaml:"remoteAccountName,omitempty" "`
+	Repository               string `json:"repository,omitempty" yaml:"repository,omitempty" `
+	Branch                   string `json:"branch,omitempty" yaml:"branch,omitempty" `
+	BranchCondition          string `json:"branchCondition,omitempty" yaml:"branchCondition,omitempty" norman:"options=only|except|all,default=only"`
+	SourceCodeCredentialName string `json:"sourceCodeCredentialName,omitempty" yaml:"sourceCodeCredentialName,omitempty" norman:"reference[sourcecodecredential]"`
 }
 
 type RunScriptStepConfig struct {
 	Image       string   `json:"image,omitempty" yaml:"image,omitempty" norman:"required"`
 	ShellScript string   `json:"shellScript,omitempty" yaml:"shellScript,omitempty"`
 	Entrypoint  string   `json:"entrypoint,omitempty" yaml:"enrtypoint,omitempty"`
-	Args        string   `json:"args,omitempty" yaml:"args,omitempty"`
+	Command     string   `json:"command,omitempty" yaml:"command,omitempty"`
 	Env         []string `json:"env,omitempty" yaml:"env,omitempty"`
 }
 
 type PublishImageStepConfig struct {
-	DockerfilePath string `json:"dockerFilePath,omittempty" yaml:"dockerFilePath,omitempty" norman:"required,default=./Dockerfile"`
+	DockerfilePath string `json:"dockerfilePath,omittempty" yaml:"dockerfilePath,omitempty" norman:"required,default=./Dockerfile"`
 	BuildContext   string `json:"buildContext,omitempty" yaml:"buildContext,omitempty" norman:"required,default=."`
-	ImageTag       string `json:"imageTag,omitempty" yaml:"imageTag,omitempty" norman:"required,default=${CICD_GIT_REPOSITORY_NAME}:${CICD_GIT_BRANCH}"`
+	Tag            string `json:"tag,omitempty" yaml:"tag,omitempty" norman:"required,default=${CICD_GIT_REPOSITORY_NAME}:${CICD_GIT_BRANCH}"`
 }
 
-type PipelineHistorySpec struct {
+type PipelineExecutionSpec struct {
 	ProjectName string `json:"projectName" norman:"required,type=reference[project]"`
 
-	//DisplayName string   `json:"displayName,omitempty" norman:"required"`
-	RunNumber   int      `json:"runNumber,omitempty" norman:"required,min=1"`
-	TriggerType string   `json:"triggerType,omitempty" norman:"required,options=manual|cron|webhook"`
-	Pipeline    Pipeline `json:"pipeline,omitempty" norman:"required"`
+	RunNumber       int      `json:"runNumber,omitempty" norman:"required,min=1"`
+	TriggeredBy     string   `json:"triggeredBy,omitempty" norman:"required,options=user|cron|webhook"`
+	TriggerUserName string   `json:"triggerUserName,omitempty" norman:"type=reference[user]"`
+	Pipeline        Pipeline `json:"pipeline,omitempty" norman:"required"`
 }
 
-type PipelineHistoryStatus struct {
+type PipelineExecutionStatus struct {
 	CommitInfo  string            `json:"commitInfo,omitempty"`
 	EnvVars     map[string]string `json:"envVars,omitempty"`
 	State       string            `json:"state,omitempty"`
@@ -217,35 +220,31 @@ type StepStatus struct {
 	EndTime   int64  `json:"endTime,omitempty"`
 }
 
-type RemoteAccountSpec struct {
+type SourceCodeCredentialSpec struct {
 	//DisplayName string `json:"displayName,omitempty" norman:"required"`
-	//RemoteType        string `json:"remoteType,omitempty" norman:"required,options=github"`
-	UserID      string `json:"userId" norman:"required,type=reference[user]"`
-	AvatarURL   string `json:"avatarUrl,omitempty"`
-	HTMLURL     string `json:"htmlUrl,omitempty"`
-	Login       string `json:"login,omitempty"`
-	AccountName string `json:"accountName,omitempty"`
-	AccessToken string `json:"accessToken,omitempty"`
+	SourceCodeType string `json:"sourceCodeType,omitempty" norman:"required,options=github"`
+	UserName       string `json:"userName" norman:"required,type=reference[user]"`
+	AvatarURL      string `json:"avatarUrl,omitempty"`
+	HTMLURL        string `json:"htmlUrl,omitempty"`
+	Login          string `json:"login,omitempty"`
+	AccountName    string `json:"accountName,omitempty"`
+	AccessToken    string `json:"accessToken,omitempty"`
 }
 
-type RemoteAccountStatus struct {
+type SourceCodeCredentialStatus struct {
 }
 
-type GitRepoCacheSpec struct {
-	RemoteType        string          `json:"remoteType,omitempty" norman:"required,options=github"`
-	UserID            string          `json:"userId" norman:"required,type=reference[user]"`
-	RemoteAccountName string          `json:"remoteAccountName,omitempty" norman:"required,type=reference[remoteaccount]`
-	Repositories      []GitRepository `json:"repositories,omitempty"`
+type SourceCodeRepositorySpec struct {
+	SourceCodeType           string   `json:"sourceCodeType,omitempty" norman:"required,options=github"`
+	UserName                 string   `json:"userName" norman:"required,type=reference[user]"`
+	SourceCodeCredentialName string   `json:"sourceCodeCredentialName,omitempty" norman:"required,type=reference[sourcecodecredential]`
+	Name                     string   `json:"name,omitempty"`
+	CloneURL                 string   `json:"cloneUrl,omitempty"`
+	Permissions              RepoPerm `json:"permissions,omitempty"`
+	Language                 string   `json:"language,omitempty"`
 }
 
-type GitRepository struct {
-	Name        string   `json:"name,omitempty"`
-	CloneURL    string   `json:"cloneUrl,omitempty"`
-	Permissions RepoPerm `json:"permissions,omitempty"`
-	Language    string   `json:"language,omitempty"`
-}
-
-type GitRepoCacheStatus struct {
+type SourceCodeRepositoryStatus struct {
 }
 
 type RepoPerm struct {
@@ -257,8 +256,8 @@ type RepoPerm struct {
 type PipelineLogSpec struct {
 	ProjectName string `json:"projectName" yaml:"projectName" norman:"required,type=reference[project]"`
 
-	PipelineHistoryName string `json:"pipelineHistoryName,omitempty" norman:"type=reference[pipelinehistory]`
-	StageOrdinal        int    `json:"stageOrdinal,omitempty" norman:"min=1"`
-	StepOrdinal         int    `json:"stepOrdinal,omitempty" norman:"min=1"`
-	Message             string `json:"message,omitempty"`
+	PipelineExecutionName string `json:"pipelineExecutionName,omitempty" norman:"type=reference[pipelineexecution]`
+	Stage                 int    `json:"stage,omitempty" norman:"min=1"`
+	Step                  int    `json:"step,omitempty" norman:"min=1"`
+	Message               string `json:"message,omitempty"`
 }
