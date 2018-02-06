@@ -21,7 +21,8 @@ const (
 	PipelineFieldStatus               = "status"
 	PipelineFieldTransitioning        = "transitioning"
 	PipelineFieldTransitioningMessage = "transitioningMessage"
-	PipelineFieldTriggers             = "triggers"
+	PipelineFieldTriggerCron          = "triggerCron"
+	PipelineFieldTriggerWebhook       = "triggerWebhook"
 	PipelineFieldUuid                 = "uuid"
 )
 
@@ -42,7 +43,8 @@ type Pipeline struct {
 	Status               *PipelineStatus   `json:"status,omitempty"`
 	Transitioning        string            `json:"transitioning,omitempty"`
 	TransitioningMessage string            `json:"transitioningMessage,omitempty"`
-	Triggers             *Triggers         `json:"triggers,omitempty"`
+	TriggerCron          *TriggerCron      `json:"triggerCron,omitempty"`
+	TriggerWebhook       *bool             `json:"triggerWebhook,omitempty"`
 	Uuid                 string            `json:"uuid,omitempty"`
 }
 type PipelineCollection struct {
