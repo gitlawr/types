@@ -159,7 +159,7 @@ type Step struct {
 type SourceCodeStepConfig struct {
 	Url                      string `json:"url,omitempty" yaml:"url,omitempty" `
 	Branch                   string `json:"branch,omitempty" yaml:"branch,omitempty" `
-	SourceCodeCredentialName string `json:"sourceCodeCredentialName,omitempty" yaml:"sourceCodeCredentialName,omitempty" norman:"reference[sourcecodecredential]"`
+	SourceCodeCredentialName string `json:"sourceCodeCredentialName,omitempty" yaml:"sourceCodeCredentialName,omitempty" norman:"type=reference[sourceCodeCredential]"`
 }
 
 type RunScriptStepConfig struct {
@@ -225,8 +225,7 @@ type SourceCodeCredentialStatus struct {
 type SourceCodeRepositorySpec struct {
 	SourceCodeType           string   `json:"sourceCodeType,omitempty" norman:"required,options=github"`
 	UserName                 string   `json:"userName" norman:"required,type=reference[user]"`
-	SourceCodeCredentialName string   `json:"sourceCodeCredentialName,omitempty" norman:"required,type=reference[sourcecodecredential]`
-	Name                     string   `json:"name,omitempty"`
+	SourceCodeCredentialName string   `json:"sourceCodeCredentialName,omitempty" norman:"required,type=reference[sourceCodeCredential]`
 	Url                      string   `json:"url,omitempty"`
 	Permissions              RepoPerm `json:"permissions,omitempty"`
 	Language                 string   `json:"language,omitempty"`
