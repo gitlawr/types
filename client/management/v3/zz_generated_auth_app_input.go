@@ -6,8 +6,9 @@ const (
 	AuthAppInputFieldClientSecret = "clientSecret"
 	AuthAppInputFieldCode         = "code"
 	AuthAppInputFieldHost         = "host"
-	AuthAppInputFieldRedirectUrl  = "type"
+	AuthAppInputFieldRedirectUrl  = "redirectUrl"
 	AuthAppInputFieldTLS          = "tls"
+	AuthAppInputFieldType         = "type"
 )
 
 type AuthAppInput struct {
@@ -15,6 +16,7 @@ type AuthAppInput struct {
 	ClientSecret string `json:"clientSecret,omitempty"`
 	Code         string `json:"code,omitempty"`
 	Host         string `json:"host,omitempty"`
-	RedirectUrl  string `json:"type,omitempty"`
+	RedirectUrl  string `json:"redirectUrl,omitempty"`
 	TLS          *bool  `json:"tls,omitempty"`
+	Type         string `json:"type,omitempty"`
 }
