@@ -1,12 +1,12 @@
 package client
 
 const (
-	AuthUserInputType      = "authUserInput"
-	AuthUserInputFieldCode = "code"
-	AuthUserInputFieldType = "type"
+	AuthUserInputType             = "authUserInput"
+	AuthUserInputFieldCode        = "code"
+	AuthUserInputFieldRedirectUrl = "type"
 )
 
 type AuthUserInput struct {
-	Code string `json:"code,omitempty"`
-	Type string `json:"type,omitempty"`
+	Code        string `json:"code,omitempty"`
+	RedirectUrl string `json:"type,omitempty"`
 }
