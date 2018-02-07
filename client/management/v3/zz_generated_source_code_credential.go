@@ -18,13 +18,13 @@ const (
 	SourceCodeCredentialFieldLoginName            = "loginName"
 	SourceCodeCredentialFieldName                 = "name"
 	SourceCodeCredentialFieldOwnerReferences      = "ownerReferences"
-	SourceCodeCredentialFieldRancherUserId        = "rancherUserId"
 	SourceCodeCredentialFieldRemoved              = "removed"
-	SourceCodeCredentialFieldSourceCodeType       = "sourceCodeType"
 	SourceCodeCredentialFieldState                = "state"
 	SourceCodeCredentialFieldStatus               = "status"
 	SourceCodeCredentialFieldTransitioning        = "transitioning"
 	SourceCodeCredentialFieldTransitioningMessage = "transitioningMessage"
+	SourceCodeCredentialFieldType                 = "type"
+	SourceCodeCredentialFieldUserId               = "UserId"
 	SourceCodeCredentialFieldUuid                 = "uuid"
 )
 
@@ -42,13 +42,13 @@ type SourceCodeCredential struct {
 	LoginName            string                      `json:"loginName,omitempty"`
 	Name                 string                      `json:"name,omitempty"`
 	OwnerReferences      []OwnerReference            `json:"ownerReferences,omitempty"`
-	RancherUserId        string                      `json:"rancherUserId,omitempty"`
 	Removed              string                      `json:"removed,omitempty"`
-	SourceCodeType       string                      `json:"sourceCodeType,omitempty"`
 	State                string                      `json:"state,omitempty"`
 	Status               *SourceCodeCredentialStatus `json:"status,omitempty"`
 	Transitioning        string                      `json:"transitioning,omitempty"`
 	TransitioningMessage string                      `json:"transitioningMessage,omitempty"`
+	Type                 string                      `json:"type,omitempty"`
+	UserId               string                      `json:"UserId,omitempty"`
 	Uuid                 string                      `json:"uuid,omitempty"`
 }
 type SourceCodeCredentialCollection struct {

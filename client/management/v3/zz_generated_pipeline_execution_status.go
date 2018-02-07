@@ -1,20 +1,18 @@
 package client
 
 const (
-	PipelineExecutionStatusType             = "pipelineExecutionStatus"
-	PipelineExecutionStatusFieldCommitInfo  = "commitInfo"
-	PipelineExecutionStatusFieldEndTime     = "endTime"
-	PipelineExecutionStatusFieldEnvVars     = "envVars"
-	PipelineExecutionStatusFieldStageStatus = "stageStatus"
-	PipelineExecutionStatusFieldStartTime   = "startTime"
-	PipelineExecutionStatusFieldState       = "state"
+	PipelineExecutionStatusType         = "pipelineExecutionStatus"
+	PipelineExecutionStatusFieldCommit  = "commit"
+	PipelineExecutionStatusFieldEnded   = "ended"
+	PipelineExecutionStatusFieldStages  = "stages"
+	PipelineExecutionStatusFieldStarted = "started"
+	PipelineExecutionStatusFieldState   = "state"
 )
 
 type PipelineExecutionStatus struct {
-	CommitInfo  string            `json:"commitInfo,omitempty"`
-	EndTime     *int64            `json:"endTime,omitempty"`
-	EnvVars     map[string]string `json:"envVars,omitempty"`
-	StageStatus []StageStatus     `json:"stageStatus,omitempty"`
-	StartTime   *int64            `json:"startTime,omitempty"`
-	State       string            `json:"state,omitempty"`
+	Commit  string        `json:"commit,omitempty"`
+	Ended   string        `json:"ended,omitempty"`
+	Stages  []StageStatus `json:"stages,omitempty"`
+	Started string        `json:"started,omitempty"`
+	State   string        `json:"state,omitempty"`
 }

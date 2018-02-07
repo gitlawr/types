@@ -7,6 +7,7 @@ import (
 const (
 	SourceCodeRepositoryType                          = "sourceCodeRepository"
 	SourceCodeRepositoryFieldAnnotations              = "annotations"
+	SourceCodeRepositoryFieldClusterId                = "clusterId"
 	SourceCodeRepositoryFieldCreated                  = "created"
 	SourceCodeRepositoryFieldCreatorID                = "creatorId"
 	SourceCodeRepositoryFieldLabels                   = "labels"
@@ -16,11 +17,11 @@ const (
 	SourceCodeRepositoryFieldPermissions              = "permissions"
 	SourceCodeRepositoryFieldRemoved                  = "removed"
 	SourceCodeRepositoryFieldSourceCodeCredentialName = "sourceCodeCredentialName"
-	SourceCodeRepositoryFieldSourceCodeType           = "sourceCodeType"
 	SourceCodeRepositoryFieldState                    = "state"
 	SourceCodeRepositoryFieldStatus                   = "status"
 	SourceCodeRepositoryFieldTransitioning            = "transitioning"
 	SourceCodeRepositoryFieldTransitioningMessage     = "transitioningMessage"
+	SourceCodeRepositoryFieldType                     = "type"
 	SourceCodeRepositoryFieldUrl                      = "url"
 	SourceCodeRepositoryFieldUserId                   = "userId"
 	SourceCodeRepositoryFieldUuid                     = "uuid"
@@ -29,6 +30,7 @@ const (
 type SourceCodeRepository struct {
 	types.Resource
 	Annotations              map[string]string           `json:"annotations,omitempty"`
+	ClusterId                string                      `json:"clusterId,omitempty"`
 	Created                  string                      `json:"created,omitempty"`
 	CreatorID                string                      `json:"creatorId,omitempty"`
 	Labels                   map[string]string           `json:"labels,omitempty"`
@@ -38,11 +40,11 @@ type SourceCodeRepository struct {
 	Permissions              *RepoPerm                   `json:"permissions,omitempty"`
 	Removed                  string                      `json:"removed,omitempty"`
 	SourceCodeCredentialName string                      `json:"sourceCodeCredentialName,omitempty"`
-	SourceCodeType           string                      `json:"sourceCodeType,omitempty"`
 	State                    string                      `json:"state,omitempty"`
 	Status                   *SourceCodeRepositoryStatus `json:"status,omitempty"`
 	Transitioning            string                      `json:"transitioning,omitempty"`
 	TransitioningMessage     string                      `json:"transitioningMessage,omitempty"`
+	Type                     string                      `json:"type,omitempty"`
 	Url                      string                      `json:"url,omitempty"`
 	UserId                   string                      `json:"userId,omitempty"`
 	Uuid                     string                      `json:"uuid,omitempty"`
