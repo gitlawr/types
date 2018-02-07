@@ -118,29 +118,24 @@ type PipelineCondition struct {
 }
 
 type PipelineStatus struct {
-	NextRunNumber int    `json:"nextRunNumber" yaml:"nextRunNumber,omitempty" norman:"default=1,min=1"`
-	LastRunId     string `json:"lastRunId,omitempty" yaml:"lastRunId,omitempty"`
-	LastRunState  string `json:"lastRunState,omitempty" yaml:"lastRunState,omitempty"`
-	LastRunTime   int64  `json:"lastRunTime,omitempty" yaml:"lastRunTime,omitempty"`
-	NextRunTime   int64  `json:"nextRunTime,omitempty" yaml:"nextRunTime,omitempty"`
-	WebHookId     string `json:"webhookId,omitempty" yaml:"webhookId,omitempty"`
-	WebHookToken  string `json:"webhookToken,omitempty" yaml:"webhookToken,omitempty"`
+	NextRun         int    `json:"nextRun" yaml:"nextRun,omitempty" norman:"default=1,min=1"`
+	LastExecutionId string `json:"lastExecutionId,omitempty" yaml:"lastExecutionId,omitempty"`
+	LastRunState    string `json:"lastRunState,omitempty" yaml:"lastRunState,omitempty"`
+	LastStarted     string `json:"lastStarted,omitempty" yaml:"lastStarted,omitempty"`
+	NextStart       string `json:"nextStart,omitempty" yaml:"nextStart,omitempty"`
+	WebHookId       string `json:"webhookId,omitempty" yaml:"webhookId,omitempty"`
+	Token           string `json:"token,omitempty" yaml:"token,omitempty"`
 }
 
 type PipelineSpec struct {
 	ProjectName string `json:"projectName" yaml:"projectName" norman:"required,type=reference[project]"`
 
-	Active bool `json:"active,omitempty" yaml:"active,omitempty"`
 	//DisplayName string   `json:"displayName,omitempty" yaml:"displayName,omitempty" norman:"required"`
-	TriggerWebhook bool         `json:"triggerWebhook,omitempty" yaml:"triggerWebhook,omitempty"`
-	TriggerCron    *TriggerCron `json:"triggerCron,omitempty" yaml:"triggerCron,omitempty"`
+	TriggerWebhook        bool   `json:"triggerWebhook,omitempty" yaml:"triggerWebhook,omitempty"`
+	TriggerCronTimezone   string `json:"triggerCronTimezone,omitempty" yaml:"triggerCronTimezone,omitempty"`
+	TriggerCronExpression string `json:"triggerCronExpression,omitempty" yaml:"triggerCronExpression,omitempty"`
 
 	Stages []Stage `json:"stages,omitempty" yaml:"stages,omitempty" norman:"required"`
-}
-
-type TriggerCron struct {
-	Timezone string `json:"timezone,omitempty" yaml:"timezone,omitempty"`
-	Spec     string `json:"spec,omitempty" yaml:"spec,omitempty"`
 }
 
 type Stage struct {
@@ -187,43 +182,43 @@ type PipelineExecutionSpec struct {
 }
 
 type PipelineExecutionStatus struct {
-	CommitInfo  string            `json:"commitInfo,omitempty"`
-	EnvVars     map[string]string `json:"envVars,omitempty"`
-	State       string            `json:"state,omitempty"`
-	StartTime   int64             `json:"startTime,omitempty"`
-	EndTime     int64             `json:"endTime,omitempty"`
-	StageStatus []StageStatus     `json:"stageStatus,omitempty"`
+	Commit  string        `json:"commit,omitempty"`
+	State   string        `json:"state,omitempty"`
+	Started string        `json:"started,omitempty"`
+	Ended   string        `json:"ended,omitempty"`
+	Stages  []StageStatus `json:"stages,omitempty"`
 }
 
 type StageStatus struct {
-	State      string       `json:"state,omitempty"`
-	StartTime  int64        `json:"startTime,omitempty"`
-	EndTime    int64        `json:"endTime,omitempty"`
-	StepStatus []StepStatus `json:"stepStatus,omitempty"`
+	State   string       `json:"state,omitempty"`
+	Started string       `json:"started,omitempty"`
+	Ended   string       `json:"ended,omitempty"`
+	Steps   []StepStatus `json:"steps,omitempty"`
 }
 
 type StepStatus struct {
-	State     string `json:"state,omitempty"`
-	StartTime int64  `json:"startTime,omitempty"`
-	EndTime   int64  `json:"endTime,omitempty"`
+	State   string `json:"state,omitempty"`
+	Started string `json:"started,omitempty"`
+	Ended   string `json:"ended,omitempty"`
 }
 
 type SourceCodeCredentialSpec struct {
-	ClusterName     string `json:"clusterName" norman:"required,type=reference[cluster]"`
-	SourceCodeType  string `json:"sourceCodeType,omitempty" norman:"required,options=github"`
-	RancherUserName string `json:"rancherUserName" norman:"required,type=reference[user]"`
-	AvatarURL       string `json:"avatarUrl,omitempty"`
-	HTMLURL         string `json:"htmlUrl,omitempty"`
-	LoginName       string `json:"loginName,omitempty"`
-	DisplayName     string `json:"displayName,omitempty"`
-	AccessToken     string `json:"accessToken,omitempty"`
+	ClusterName string `json:"clusterName" norman:"required,type=reference[cluster]"`
+	Kind        string `json:"kind,omitempty" norman:"required,options=github"`
+	UserName    string `json:"UserName" norman:"required,type=reference[user]"`
+	AvatarURL   string `json:"avatarUrl,omitempty"`
+	HTMLURL     string `json:"htmlUrl,omitempty"`
+	LoginName   string `json:"loginName,omitempty"`
+	DisplayName string `json:"displayName,omitempty"`
+	AccessToken string `json:"accessToken,omitempty"`
 }
 
 type SourceCodeCredentialStatus struct {
 }
 
 type SourceCodeRepositorySpec struct {
-	SourceCodeType           string   `json:"sourceCodeType,omitempty" norman:"required,options=github"`
+	ClusterName              string   `json:"clusterName" norman:"required,type=reference[cluster]"`
+	Kind                     string   `json:"kind,omitempty" norman:"required,options=github"`
 	UserName                 string   `json:"userName" norman:"required,type=reference[user]"`
 	SourceCodeCredentialName string   `json:"sourceCodeCredentialName,omitempty" norman:"required,type=reference[sourceCodeCredential]`
 	Url                      string   `json:"url,omitempty"`
@@ -250,15 +245,15 @@ type PipelineExecutionLogSpec struct {
 }
 
 type AuthAppInput struct {
-	SourceCodeType string `json:"sourceCodeType,omitempty" norman:"type=string,required"`
-	TLS            bool   `json:"tls,omitempty"`
-	Host           string `json:"host,omitempty"`
-	ClientId       string `json:"clientId,omitempty" norman:"type=string,required"`
-	ClientSecret   string `json:"clientSecret,omitempty" norman:"type=string,required"`
-	Code           string `json:"code,omitempty" norman:"type=string,required"`
+	Kind         string `json:"kind,omitempty" norman:"type=string,required"`
+	TLS          bool   `json:"tls,omitempty"`
+	Host         string `json:"host,omitempty"`
+	ClientId     string `json:"clientId,omitempty" norman:"type=string,required"`
+	ClientSecret string `json:"clientSecret,omitempty" norman:"type=string,required"`
+	Code         string `json:"code,omitempty" norman:"type=string,required"`
 }
 
 type AuthUserInput struct {
-	SourceCodeType string `json:"sourceCodeType,omitempty" norman:"type=string,required"`
-	Code           string `json:"code,omitempty" norman:"type=string,required"`
+	Kind string `json:"kind,omitempty" norman:"type=string,required"`
+	Code string `json:"code,omitempty" norman:"type=string,required"`
 }
