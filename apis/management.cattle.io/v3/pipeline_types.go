@@ -204,7 +204,7 @@ type StepStatus struct {
 
 type SourceCodeCredentialSpec struct {
 	ClusterName string `json:"clusterName" norman:"required,type=reference[cluster]"`
-	Kind        string `json:"kind,omitempty" norman:"required,options=github"`
+	Type        string `json:"type,omitempty" norman:"required,options=github"`
 	UserName    string `json:"UserName" norman:"required,type=reference[user]"`
 	AvatarURL   string `json:"avatarUrl,omitempty"`
 	HTMLURL     string `json:"htmlUrl,omitempty"`
@@ -218,7 +218,7 @@ type SourceCodeCredentialStatus struct {
 
 type SourceCodeRepositorySpec struct {
 	ClusterName              string   `json:"clusterName" norman:"required,type=reference[cluster]"`
-	Kind                     string   `json:"kind,omitempty" norman:"required,options=github"`
+	Type                     string   `json:"type,omitempty" norman:"required,options=github"`
 	UserName                 string   `json:"userName" norman:"required,type=reference[user]"`
 	SourceCodeCredentialName string   `json:"sourceCodeCredentialName,omitempty" norman:"required,type=reference[sourceCodeCredential]`
 	Url                      string   `json:"url,omitempty"`
@@ -245,7 +245,7 @@ type PipelineExecutionLogSpec struct {
 }
 
 type AuthAppInput struct {
-	Kind         string `json:"kind,omitempty" norman:"type=string,required"`
+	Type         string `json:"type,omitempty" norman:"type=string,required"`
 	TLS          bool   `json:"tls,omitempty"`
 	Host         string `json:"host,omitempty"`
 	ClientId     string `json:"clientId,omitempty" norman:"type=string,required"`
@@ -254,6 +254,6 @@ type AuthAppInput struct {
 }
 
 type AuthUserInput struct {
-	Kind string `json:"kind,omitempty" norman:"type=string,required"`
+	Type string `json:"type,omitempty" norman:"type=string,required"`
 	Code string `json:"code,omitempty" norman:"type=string,required"`
 }
