@@ -246,6 +246,7 @@ type PipelineExecutionLogSpec struct {
 
 type AuthAppInput struct {
 	Type         string `json:"type,omitempty" norman:"type=string,required"`
+	RedirectUrl  string `json:"type,omitempty" norman:"type=string"`
 	TLS          bool   `json:"tls,omitempty"`
 	Host         string `json:"host,omitempty"`
 	ClientId     string `json:"clientId,omitempty" norman:"type=string,required"`
@@ -254,6 +255,7 @@ type AuthAppInput struct {
 }
 
 type AuthUserInput struct {
-	Type string `json:"type,omitempty" norman:"type=string,required"`
-	Code string `json:"code,omitempty" norman:"type=string,required"`
+	Type        string `json:"type,omitempty" norman:"type=string,required"`
+	RedirectUrl string `json:"type,omitempty" norman:"type=string"`
+	Code        string `json:"code,omitempty" norman:"type=string,required"`
 }
