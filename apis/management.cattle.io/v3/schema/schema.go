@@ -242,7 +242,7 @@ func pipelineTypes(schema *types.Schemas) *types.Schemas {
 		MustImport(&Version, v3.AuthUserInput{}).
 		MustImportAndCustomize(&Version, v3.SourceCodeCredential{}, func(schema *types.Schema) {
 			schema.ResourceActions = map[string]types.Action{
-				"refresh": {},
+				"refreshrepos": {},
 			}
 		}).
 		MustImportAndCustomize(&Version, v3.ClusterPipeline{}, func(schema *types.Schema) {
