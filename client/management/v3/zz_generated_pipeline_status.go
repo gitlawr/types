@@ -7,6 +7,7 @@ const (
 	PipelineStatusFieldLastStarted     = "lastStarted"
 	PipelineStatusFieldNextRun         = "nextRun"
 	PipelineStatusFieldNextStart       = "nextStart"
+	PipelineStatusFieldState           = "state"
 	PipelineStatusFieldToken           = "token"
 	PipelineStatusFieldWebHookId       = "webhookId"
 )
@@ -17,6 +18,7 @@ type PipelineStatus struct {
 	LastStarted     string `json:"lastStarted,omitempty"`
 	NextRun         *int64 `json:"nextRun,omitempty"`
 	NextStart       string `json:"nextStart,omitempty"`
+	State           string `json:"state,omitempty"`
 	Token           string `json:"token,omitempty"`
 	WebHookId       string `json:"webhookId,omitempty"`
 }
