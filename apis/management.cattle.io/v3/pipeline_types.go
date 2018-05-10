@@ -80,10 +80,11 @@ type SourceCodeRepository struct {
 }
 
 type ClusterPipelineSpec struct {
-	ClusterName  string        `json:"clusterName" norman:"type=reference[cluster]"`
-	Deploy       bool          `json:"deploy"`
-	GithubConfig *GitAppConfig `json:"githubConfig,omitempty"`
-	GitlabConfig *GitAppConfig `json:"gitlabConfig,omitempty"`
+	ClusterName      string            `json:"clusterName" norman:"type=reference[cluster]"`
+	Deploy           bool              `json:"deploy"`
+	GithubConfig     *GitAppConfig     `json:"githubConfig,omitempty"`
+	GitlabConfig     *GitAppConfig     `json:"gitlabConfig,omitempty"`
+	GeneralGitConfig *GeneralGitConfig `json:"generalGitConfig,omitempty"`
 }
 
 type ClusterPipelineStatus struct {
@@ -95,6 +96,9 @@ type GitAppConfig struct {
 	ClientID     string `json:"clientId,omitempty"`
 	ClientSecret string `json:"clientSecret,omitempty"`
 	RedirectURL  string `json:"redirectUrl,omitempty"`
+}
+
+type GeneralGitConfig struct {
 }
 
 type PipelineStatus struct {
@@ -256,9 +260,9 @@ type AuthAppInput struct {
 	RedirectURL    string `json:"redirectUrl,omitempty" norman:"type=string"`
 	TLS            bool   `json:"tls,omitempty"`
 	Host           string `json:"host,omitempty"`
-	ClientID       string `json:"clientId,omitempty" norman:"type=string,required"`
-	ClientSecret   string `json:"clientSecret,omitempty" norman:"type=string,required"`
-	Code           string `json:"code,omitempty" norman:"type=string,required"`
+	ClientID       string `json:"clientId,omitempty" norman:"type=string"`
+	ClientSecret   string `json:"clientSecret,omitempty" norman:"type=string"`
+	Code           string `json:"code,omitempty" norman:"type=string"`
 }
 
 type AuthUserInput struct {
