@@ -211,7 +211,7 @@ type StepStatus struct {
 type SourceCodeCredentialSpec struct {
 	ClusterName    string `json:"clusterName" norman:"required,type=reference[cluster]"`
 	SourceCodeType string `json:"sourceCodeType,omitempty" norman:"required,options=github|gitlab|git"`
-	CredentialType string `json:"credentialType,omitempty"`
+	CredentialType string `json:"credentialType,omitempty" norman:"options=password|sshkey"`
 	UserName       string `json:"userName" norman:"required,type=reference[user]"`
 	DisplayName    string `json:"displayName,omitempty"`
 	AvatarURL      string `json:"avatarUrl,omitempty"`
