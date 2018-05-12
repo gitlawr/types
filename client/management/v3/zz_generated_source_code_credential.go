@@ -12,6 +12,7 @@ const (
 	SourceCodeCredentialFieldClusterId            = "clusterId"
 	SourceCodeCredentialFieldCreated              = "created"
 	SourceCodeCredentialFieldCreatorID            = "creatorId"
+	SourceCodeCredentialFieldCredentialType       = "credentialType"
 	SourceCodeCredentialFieldDisplayName          = "displayName"
 	SourceCodeCredentialFieldHTMLURL              = "htmlUrl"
 	SourceCodeCredentialFieldLabels               = "labels"
@@ -36,6 +37,7 @@ type SourceCodeCredential struct {
 	ClusterId            string                      `json:"clusterId,omitempty" yaml:"clusterId,omitempty"`
 	Created              string                      `json:"created,omitempty" yaml:"created,omitempty"`
 	CreatorID            string                      `json:"creatorId,omitempty" yaml:"creatorId,omitempty"`
+	CredentialType       string                      `json:"credentialType,omitempty" yaml:"credentialType,omitempty"`
 	DisplayName          string                      `json:"displayName,omitempty" yaml:"displayName,omitempty"`
 	HTMLURL              string                      `json:"htmlUrl,omitempty" yaml:"htmlUrl,omitempty"`
 	Labels               map[string]string           `json:"labels,omitempty" yaml:"labels,omitempty"`
