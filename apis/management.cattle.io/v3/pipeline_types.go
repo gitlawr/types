@@ -210,9 +210,10 @@ type StepStatus struct {
 
 type SourceCodeCredentialSpec struct {
 	ClusterName    string `json:"clusterName" norman:"required,type=reference[cluster]"`
-	SourceCodeType string `json:"sourceCodeType,omitempty" norman:"required,options=github"`
+	SourceCodeType string `json:"sourceCodeType,omitempty" norman:"required,options=github|gitlab|git"`
+	CredentialType string `json:"credentialType,omitempty"`
 	UserName       string `json:"userName" norman:"required,type=reference[user]"`
-	DisplayName    string `json:"displayName,omitempty" norman:"required"`
+	DisplayName    string `json:"displayName,omitempty"`
 	AvatarURL      string `json:"avatarUrl,omitempty"`
 	HTMLURL        string `json:"htmlUrl,omitempty"`
 	LoginName      string `json:"loginName,omitempty"`
@@ -224,7 +225,7 @@ type SourceCodeCredentialStatus struct {
 
 type SourceCodeRepositorySpec struct {
 	ClusterName              string   `json:"clusterName" norman:"required,type=reference[cluster]"`
-	SourceCodeType           string   `json:"sourceCodeType,omitempty" norman:"required,options=github"`
+	SourceCodeType           string   `json:"sourceCodeType,omitempty" norman:"required,options=github|gitlab|git"`
 	UserName                 string   `json:"userName" norman:"required,type=reference[user]"`
 	SourceCodeCredentialName string   `json:"sourceCodeCredentialName,omitempty" norman:"required,type=reference[sourceCodeCredential]"`
 	URL                      string   `json:"url,omitempty"`
