@@ -174,7 +174,7 @@ type PublishImageConfig struct {
 	DockerfilePath string `json:"dockerfilePath,omittempty" yaml:"dockerfilePath,omitempty" norman:"required,default=./Dockerfile"`
 	BuildContext   string `json:"buildContext,omitempty" yaml:"buildContext,omitempty" norman:"required,default=."`
 	Tag            string `json:"tag,omitempty" yaml:"tag,omitempty" norman:"required"`
-	Push           string `json:"push,omitempty" yaml:"push,omitempty"`
+	Push           bool   `json:"push,omitempty" yaml:"push,omitempty"`
 }
 
 type PipelineExecutionSpec struct {
