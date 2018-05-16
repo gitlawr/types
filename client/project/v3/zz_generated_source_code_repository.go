@@ -7,7 +7,6 @@ import (
 const (
 	SourceCodeRepositoryType                        = "sourceCodeRepository"
 	SourceCodeRepositoryFieldAnnotations            = "annotations"
-	SourceCodeRepositoryFieldClusterId              = "clusterId"
 	SourceCodeRepositoryFieldCreated                = "created"
 	SourceCodeRepositoryFieldCreatorID              = "creatorId"
 	SourceCodeRepositoryFieldDefaultBranch          = "defaultBranch"
@@ -16,6 +15,7 @@ const (
 	SourceCodeRepositoryFieldName                   = "name"
 	SourceCodeRepositoryFieldOwnerReferences        = "ownerReferences"
 	SourceCodeRepositoryFieldPermissions            = "permissions"
+	SourceCodeRepositoryFieldProjectId              = "projectId"
 	SourceCodeRepositoryFieldRemoved                = "removed"
 	SourceCodeRepositoryFieldSourceCodeCredentialId = "sourceCodeCredentialId"
 	SourceCodeRepositoryFieldSourceCodeType         = "sourceCodeType"
@@ -31,7 +31,6 @@ const (
 type SourceCodeRepository struct {
 	types.Resource
 	Annotations            map[string]string           `json:"annotations,omitempty" yaml:"annotations,omitempty"`
-	ClusterId              string                      `json:"clusterId,omitempty" yaml:"clusterId,omitempty"`
 	Created                string                      `json:"created,omitempty" yaml:"created,omitempty"`
 	CreatorID              string                      `json:"creatorId,omitempty" yaml:"creatorId,omitempty"`
 	DefaultBranch          string                      `json:"defaultBranch,omitempty" yaml:"defaultBranch,omitempty"`
@@ -40,6 +39,7 @@ type SourceCodeRepository struct {
 	Name                   string                      `json:"name,omitempty" yaml:"name,omitempty"`
 	OwnerReferences        []OwnerReference            `json:"ownerReferences,omitempty" yaml:"ownerReferences,omitempty"`
 	Permissions            *RepoPerm                   `json:"permissions,omitempty" yaml:"permissions,omitempty"`
+	ProjectId              string                      `json:"projectId,omitempty" yaml:"projectId,omitempty"`
 	Removed                string                      `json:"removed,omitempty" yaml:"removed,omitempty"`
 	SourceCodeCredentialId string                      `json:"sourceCodeCredentialId,omitempty" yaml:"sourceCodeCredentialId,omitempty"`
 	SourceCodeType         string                      `json:"sourceCodeType,omitempty" yaml:"sourceCodeType,omitempty"`
@@ -67,6 +67,8 @@ type SourceCodeRepositoryOperations interface {
 	Update(existing *SourceCodeRepository, updates interface{}) (*SourceCodeRepository, error)
 	ByID(id string) (*SourceCodeRepository, error)
 	Delete(container *SourceCodeRepository) error
+
+	CollectionActionSearchpipelines(resource *SourceCodeRepositoryCollection, input *SearchPipelineInput) error
 }
 
 func newSourceCodeRepositoryClient(apiClient *Client) *SourceCodeRepositoryClient {
@@ -112,4 +114,9 @@ func (c *SourceCodeRepositoryClient) ByID(id string) (*SourceCodeRepository, err
 
 func (c *SourceCodeRepositoryClient) Delete(container *SourceCodeRepository) error {
 	return c.apiClient.Ops.DoResourceDelete(SourceCodeRepositoryType, &container.Resource)
+}
+
+func (c *SourceCodeRepositoryClient) CollectionActionSearchpipelines(resource *SourceCodeRepositoryCollection, input *SearchPipelineInput) error {
+	err := c.apiClient.Ops.DoCollectionAction(SourceCodeRepositoryType, "searchpipelines", &resource.Collection, input, nil)
+	return err
 }
