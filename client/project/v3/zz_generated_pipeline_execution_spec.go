@@ -16,6 +16,7 @@ const (
 	PipelineExecutionSpecFieldRef            = "ref"
 	PipelineExecutionSpecFieldRepositoryURL  = "repositoryUrl"
 	PipelineExecutionSpecFieldRun            = "run"
+	PipelineExecutionSpecFieldSharedEngine   = "sharedEngine"
 	PipelineExecutionSpecFieldTitle          = "title"
 	PipelineExecutionSpecFieldTriggerUserId  = "triggerUserId"
 	PipelineExecutionSpecFieldTriggeredBy    = "triggeredBy"
@@ -36,6 +37,7 @@ type PipelineExecutionSpec struct {
 	Ref            string          `json:"ref,omitempty" yaml:"ref,omitempty"`
 	RepositoryURL  string          `json:"repositoryUrl,omitempty" yaml:"repositoryUrl,omitempty"`
 	Run            int64           `json:"run,omitempty" yaml:"run,omitempty"`
+	SharedEngine   bool            `json:"sharedEngine,omitempty" yaml:"sharedEngine,omitempty"`
 	Title          string          `json:"title,omitempty" yaml:"title,omitempty"`
 	TriggerUserId  string          `json:"triggerUserId,omitempty" yaml:"triggerUserId,omitempty"`
 	TriggeredBy    string          `json:"triggeredBy,omitempty" yaml:"triggeredBy,omitempty"`
