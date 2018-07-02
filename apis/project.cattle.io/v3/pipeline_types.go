@@ -236,6 +236,7 @@ type PipelineExecutionSpec struct {
 
 	PipelineName    string         `json:"pipelineName" norman:"required,type=reference[pipeline]"`
 	PipelineConfig  PipelineConfig `json:"pipelineConfig,omitempty" norman:"required"`
+	SharedEngine    bool           `json:"sharedEngine,omitempty"`
 	RepositoryURL   string         `json:"repositoryUrl,omitempty"`
 	Run             int            `json:"run,omitempty" norman:"required,min=1"`
 	TriggeredBy     string         `json:"triggeredBy,omitempty" norman:"required,options=user|cron|webhook"`
