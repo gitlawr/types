@@ -186,7 +186,10 @@ type Step struct {
 	PublishImageConfig *PublishImageConfig `json:"publishImageConfig,omitempty" yaml:"publishImageConfig,omitempty"`
 	ApplyYamlConfig    *ApplyYamlConfig    `json:"applyYamlConfig,omitempty" yaml:"applyYamlConfig,omitempty"`
 
-	When *Constraints `json:"when,omitempty" yaml:"when,omitempty"`
+	Env        map[string]string `json:"env,omitempty" yaml:"env,omitempty"`
+	EnvFrom    []EnvFrom         `json:"envFrom,omitempty" yaml:"envFrom,omitempty"`
+	Privileged bool              `json:"privileged,omitempty" yaml:"privileged,omitempty"`
+	When       *Constraints      `json:"when,omitempty" yaml:"when,omitempty"`
 	//Step timeout in minutes
 	Timeout int `json:"timeout,omitempty" yaml:"timeout,omitempty"`
 }
@@ -205,14 +208,8 @@ type SourceCodeConfig struct {
 }
 
 type RunScriptConfig struct {
-	Image       string            `json:"image,omitempty" yaml:"image,omitempty" norman:"required"`
-	IsShell     bool              `json:"isShell,omitempty" yaml:"isShell,omitempty"`
-	ShellScript string            `json:"shellScript,omitempty" yaml:"shellScript,omitempty"`
-	Entrypoint  string            `json:"entrypoint,omitempty" yaml:"enrtypoint,omitempty"`
-	Command     string            `json:"command,omitempty" yaml:"command,omitempty"`
-	Env         map[string]string `json:"env,omitempty" yaml:"env,omitempty"`
-	EnvFrom     []EnvFrom         `json:"envFrom,omitempty" yaml:"envFrom,omitempty"`
-	Privileged  bool              `json:"privileged,omitempty" yaml:"privileged,omitempty"`
+	Image       string `json:"image,omitempty" yaml:"image,omitempty" norman:"required"`
+	ShellScript string `json:"shellScript,omitempty" yaml:"shellScript,omitempty"`
 }
 
 type PublishImageConfig struct {
@@ -224,11 +221,9 @@ type PublishImageConfig struct {
 }
 
 type ApplyYamlConfig struct {
-	Path      string            `json:"path,omitempty" yaml:"path,omitempty"`
-	Content   string            `json:"content,omitempty" yaml:"content,omitempty"`
-	Namespace string            `json:"namespace,omitempty" yaml:"namespace,omitempty"`
-	Env       map[string]string `json:"env,omitempty" yaml:"env,omitempty"`
-	EnvFrom   []EnvFrom         `json:"envFrom,omitempty" yaml:"envFrom,omitempty"`
+	Path      string `json:"path,omitempty" yaml:"path,omitempty"`
+	Content   string `json:"content,omitempty" yaml:"content,omitempty"`
+	Namespace string `json:"namespace,omitempty" yaml:"namespace,omitempty"`
 }
 
 type PipelineExecutionSpec struct {
