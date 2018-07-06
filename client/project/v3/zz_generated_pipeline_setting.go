@@ -15,6 +15,7 @@ const (
 	PipelineSettingFieldName            = "name"
 	PipelineSettingFieldNamespaceId     = "namespaceId"
 	PipelineSettingFieldOwnerReferences = "ownerReferences"
+	PipelineSettingFieldProjectId       = "projectId"
 	PipelineSettingFieldRemoved         = "removed"
 	PipelineSettingFieldUuid            = "uuid"
 	PipelineSettingFieldValue           = "value"
@@ -31,6 +32,7 @@ type PipelineSetting struct {
 	Name            string            `json:"name,omitempty" yaml:"name,omitempty"`
 	NamespaceId     string            `json:"namespaceId,omitempty" yaml:"namespaceId,omitempty"`
 	OwnerReferences []OwnerReference  `json:"ownerReferences,omitempty" yaml:"ownerReferences,omitempty"`
+	ProjectId       string            `json:"projectId,omitempty" yaml:"projectId,omitempty"`
 	Removed         string            `json:"removed,omitempty" yaml:"removed,omitempty"`
 	Uuid            string            `json:"uuid,omitempty" yaml:"uuid,omitempty"`
 	Value           string            `json:"value,omitempty" yaml:"value,omitempty"`
