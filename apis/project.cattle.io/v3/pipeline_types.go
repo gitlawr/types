@@ -99,6 +99,7 @@ type PipelineExecution struct {
 type PipelineSetting struct {
 	types.Namespaced
 
+	ProjectName       string `json:"projectName" norman:"type=reference[project]"`
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
