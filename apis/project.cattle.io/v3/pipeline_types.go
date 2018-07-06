@@ -327,12 +327,6 @@ type AuthUserInput struct {
 	Code           string `json:"code,omitempty" norman:"type=string,required"`
 }
 
-type SearchPipelineInput struct {
-	URL            string `json:"url,omitempty"`
-	Branch         string `json:"branch,omitempty"`
-	SourceCodeType string `json:"sourceCodeType,omitempty"`
-}
-
 type ReloadPipelineInput struct {
 	Branch string `json:"branch,omitempty"`
 }

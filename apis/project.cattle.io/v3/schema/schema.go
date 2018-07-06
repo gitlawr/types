@@ -798,7 +798,6 @@ func pipelineTypes(schema *types.Schemas) *types.Schemas {
 		MustImport(&Version, v3.AuthAppInput{}).
 		MustImport(&Version, v3.AuthUserInput{}).
 		MustImport(&Version, v3.RunPipelineInput{}).
-		MustImport(&Version, v3.SearchPipelineInput{}).
 		MustImport(&Version, v3.ReloadPipelineInput{}).
 		MustImport(&Version, v3.PushPipelineConfigInput{}).
 		MustImport(&Version, v3.GithubPipelineConfigApplyInput{}).
@@ -894,11 +893,6 @@ func pipelineTypes(schema *types.Schemas) *types.Schemas {
 		MustImportAndCustomize(&Version, v3.SourceCodeRepository{}, func(schema *types.Schema) {
 			delete(schema.ResourceFields, "namespaceId")
 			schema.ResourceMethods = []string{http.MethodGet, http.MethodDelete}
-			schema.CollectionActions = map[string]types.Action{
-				"searchpipelines": {
-					Input: "searchPipelineInput",
-				},
-			}
 		})
 
 }
