@@ -67,8 +67,6 @@ type SourceCodeRepositoryOperations interface {
 	Update(existing *SourceCodeRepository, updates interface{}) (*SourceCodeRepository, error)
 	ByID(id string) (*SourceCodeRepository, error)
 	Delete(container *SourceCodeRepository) error
-
-	CollectionActionSearchpipelines(resource *SourceCodeRepositoryCollection, input *SearchPipelineInput) error
 }
 
 func newSourceCodeRepositoryClient(apiClient *Client) *SourceCodeRepositoryClient {
@@ -114,9 +112,4 @@ func (c *SourceCodeRepositoryClient) ByID(id string) (*SourceCodeRepository, err
 
 func (c *SourceCodeRepositoryClient) Delete(container *SourceCodeRepository) error {
 	return c.apiClient.Ops.DoResourceDelete(SourceCodeRepositoryType, &container.Resource)
-}
-
-func (c *SourceCodeRepositoryClient) CollectionActionSearchpipelines(resource *SourceCodeRepositoryCollection, input *SearchPipelineInput) error {
-	err := c.apiClient.Ops.DoCollectionAction(SourceCodeRepositoryType, "searchpipelines", &resource.Collection, input, nil)
-	return err
 }
