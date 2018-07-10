@@ -148,15 +148,15 @@ type PipelineSpec struct {
 	TriggerWebhookPr   bool   `json:"triggerWebhookPr,omitempty" yaml:"triggerWebhookPr,omitempty"`
 	TriggerWebhookTag  bool   `json:"triggerWebhookTag,omitempty" yaml:"triggerWebhookTag,omitempty"`
 
-	RepositoryURL            string                    `json:"repositoryUrl,omitempty" yaml:"repositoryUrl,omitempty"`
-	SourceCodeCredentialName string                    `json:"sourceCodeCredentialName,omitempty" yaml:"sourceCodeCredentialName,omitempty" norman:"type=reference[sourceCodeCredential]"`
-	UnSyncConfigs            map[string]PipelineConfig `json:"unSyncConfigs,omitempty" yaml:"unSyncConfigs,omitempty"`
+	RepositoryURL            string `json:"repositoryUrl,omitempty" yaml:"repositoryUrl,omitempty"`
+	SourceCodeCredentialName string `json:"sourceCodeCredentialName,omitempty" yaml:"sourceCodeCredentialName,omitempty" norman:"type=reference[sourceCodeCredential]"`
 }
 
 type PipelineConfig struct {
 	Stages []Stage `json:"stages,omitempty" yaml:"stages,omitempty"`
 
-	Branch *Constraint `json:"branch,omitempty" yaml:"branch,omitempty"`
+	Timeout int         `json:"timeout,omitempty" yaml:"timeout,omitempty"`
+	Branch  *Constraint `json:"branch,omitempty" yaml:"branch,omitempty"`
 }
 
 type PipelineCondition struct {
@@ -191,8 +191,6 @@ type Step struct {
 	EnvFrom    []EnvFrom         `json:"envFrom,omitempty" yaml:"envFrom,omitempty"`
 	Privileged bool              `json:"privileged,omitempty" yaml:"privileged,omitempty"`
 	When       *Constraints      `json:"when,omitempty" yaml:"when,omitempty"`
-	//Step timeout in minutes
-	Timeout int `json:"timeout,omitempty" yaml:"timeout,omitempty"`
 }
 
 type Constraints struct {
