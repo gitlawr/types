@@ -230,7 +230,6 @@ type PipelineExecutionSpec struct {
 
 	PipelineName    string         `json:"pipelineName" norman:"required,type=reference[pipeline]"`
 	PipelineConfig  PipelineConfig `json:"pipelineConfig,omitempty" norman:"required"`
-	SharedEngine    bool           `json:"sharedEngine,omitempty"`
 	RepositoryURL   string         `json:"repositoryUrl,omitempty"`
 	Run             int            `json:"run,omitempty" norman:"required,min=1"`
 	TriggeredBy     string         `json:"triggeredBy,omitempty" norman:"required,options=user|cron|webhook"`
@@ -324,10 +323,6 @@ type AuthUserInput struct {
 	SourceCodeType string `json:"sourceCodeType,omitempty" norman:"type=string,required"`
 	RedirectURL    string `json:"redirectUrl,omitempty" norman:"type=string"`
 	Code           string `json:"code,omitempty" norman:"type=string,required"`
-}
-
-type ReloadPipelineInput struct {
-	Branch string `json:"branch,omitempty"`
 }
 
 type PushPipelineConfigInput struct {

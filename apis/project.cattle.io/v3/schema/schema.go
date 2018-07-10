@@ -798,7 +798,6 @@ func pipelineTypes(schema *types.Schemas) *types.Schemas {
 		MustImport(&Version, v3.AuthAppInput{}).
 		MustImport(&Version, v3.AuthUserInput{}).
 		MustImport(&Version, v3.RunPipelineInput{}).
-		MustImport(&Version, v3.ReloadPipelineInput{}).
 		MustImport(&Version, v3.PushPipelineConfigInput{}).
 		MustImport(&Version, v3.GithubPipelineConfigApplyInput{}).
 		MustImport(&Version, v3.GithubLoginInput{}).
@@ -859,9 +858,6 @@ func pipelineTypes(schema *types.Schemas) *types.Schemas {
 			schema.ResourceActions = map[string]types.Action{
 				"activate":   {},
 				"deactivate": {},
-				"reload": {
-					Input: "reloadPipelineInput",
-				},
 				"run": {
 					Input: "runPipelineInput",
 				},
