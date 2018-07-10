@@ -88,8 +88,6 @@ type PipelineOperations interface {
 
 	ActionPushconfig(resource *Pipeline, input *PushPipelineConfigInput) error
 
-	ActionReload(resource *Pipeline, input *ReloadPipelineInput) error
-
 	ActionRun(resource *Pipeline, input *RunPipelineInput) error
 }
 
@@ -150,11 +148,6 @@ func (c *PipelineClient) ActionDeactivate(resource *Pipeline) error {
 
 func (c *PipelineClient) ActionPushconfig(resource *Pipeline, input *PushPipelineConfigInput) error {
 	err := c.apiClient.Ops.DoAction(PipelineType, "pushconfig", &resource.Resource, input, nil)
-	return err
-}
-
-func (c *PipelineClient) ActionReload(resource *Pipeline, input *ReloadPipelineInput) error {
-	err := c.apiClient.Ops.DoAction(PipelineType, "reload", &resource.Resource, input, nil)
 	return err
 }
 
