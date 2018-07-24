@@ -879,7 +879,7 @@ func pipelineTypes(schema *types.Schemas) *types.Schemas {
 			})
 		}).
 		MustImportAndCustomize(&Version, v3.SourceCodeCredential{}, func(schema *types.Schema) {
-			delete(schema.ResourceFields, "namespaceId")
+			//delete(schema.ResourceFields, "namespaceId")
 			schema.ResourceMethods = []string{http.MethodGet, http.MethodDelete}
 			schema.ResourceActions = map[string]types.Action{
 				"refreshrepos": {},
@@ -887,7 +887,7 @@ func pipelineTypes(schema *types.Schemas) *types.Schemas {
 			}
 		}).
 		MustImportAndCustomize(&Version, v3.SourceCodeRepository{}, func(schema *types.Schema) {
-			delete(schema.ResourceFields, "namespaceId")
+			//delete(schema.ResourceFields, "namespaceId")
 			schema.ResourceMethods = []string{http.MethodGet, http.MethodDelete}
 		})
 
