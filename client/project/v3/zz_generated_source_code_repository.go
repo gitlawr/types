@@ -13,6 +13,7 @@ const (
 	SourceCodeRepositoryFieldLabels                 = "labels"
 	SourceCodeRepositoryFieldLanguage               = "language"
 	SourceCodeRepositoryFieldName                   = "name"
+	SourceCodeRepositoryFieldNamespaceId            = "namespaceId"
 	SourceCodeRepositoryFieldOwnerReferences        = "ownerReferences"
 	SourceCodeRepositoryFieldPermissions            = "permissions"
 	SourceCodeRepositoryFieldProjectID              = "projectId"
@@ -37,6 +38,7 @@ type SourceCodeRepository struct {
 	Labels                 map[string]string           `json:"labels,omitempty" yaml:"labels,omitempty"`
 	Language               string                      `json:"language,omitempty" yaml:"language,omitempty"`
 	Name                   string                      `json:"name,omitempty" yaml:"name,omitempty"`
+	NamespaceId            string                      `json:"namespaceId,omitempty" yaml:"namespaceId,omitempty"`
 	OwnerReferences        []OwnerReference            `json:"ownerReferences,omitempty" yaml:"ownerReferences,omitempty"`
 	Permissions            *RepoPerm                   `json:"permissions,omitempty" yaml:"permissions,omitempty"`
 	ProjectID              string                      `json:"projectId,omitempty" yaml:"projectId,omitempty"`

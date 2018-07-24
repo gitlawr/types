@@ -18,6 +18,7 @@ const (
 	SourceCodeCredentialFieldLoginName            = "loginName"
 	SourceCodeCredentialFieldLogout               = "logout"
 	SourceCodeCredentialFieldName                 = "name"
+	SourceCodeCredentialFieldNamespaceId          = "namespaceId"
 	SourceCodeCredentialFieldOwnerReferences      = "ownerReferences"
 	SourceCodeCredentialFieldProjectID            = "projectId"
 	SourceCodeCredentialFieldRemoved              = "removed"
@@ -43,6 +44,7 @@ type SourceCodeCredential struct {
 	LoginName            string            `json:"loginName,omitempty" yaml:"loginName,omitempty"`
 	Logout               bool              `json:"logout,omitempty" yaml:"logout,omitempty"`
 	Name                 string            `json:"name,omitempty" yaml:"name,omitempty"`
+	NamespaceId          string            `json:"namespaceId,omitempty" yaml:"namespaceId,omitempty"`
 	OwnerReferences      []OwnerReference  `json:"ownerReferences,omitempty" yaml:"ownerReferences,omitempty"`
 	ProjectID            string            `json:"projectId,omitempty" yaml:"projectId,omitempty"`
 	Removed              string            `json:"removed,omitempty" yaml:"removed,omitempty"`
