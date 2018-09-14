@@ -22,6 +22,7 @@ const (
 	ProjectAlertFieldRepeatIntervalSeconds = "repeatIntervalSeconds"
 	ProjectAlertFieldSeverity              = "severity"
 	ProjectAlertFieldState                 = "state"
+	ProjectAlertFieldTargetPipeline        = "targetPipeline"
 	ProjectAlertFieldTargetPod             = "targetPod"
 	ProjectAlertFieldTargetWorkload        = "targetWorkload"
 	ProjectAlertFieldTransitioning         = "transitioning"
@@ -47,6 +48,7 @@ type ProjectAlert struct {
 	RepeatIntervalSeconds int64             `json:"repeatIntervalSeconds,omitempty" yaml:"repeatIntervalSeconds,omitempty"`
 	Severity              string            `json:"severity,omitempty" yaml:"severity,omitempty"`
 	State                 string            `json:"state,omitempty" yaml:"state,omitempty"`
+	TargetPipeline        *TargetPipeline   `json:"targetPipeline,omitempty" yaml:"targetPipeline,omitempty"`
 	TargetPod             *TargetPod        `json:"targetPod,omitempty" yaml:"targetPod,omitempty"`
 	TargetWorkload        *TargetWorkload   `json:"targetWorkload,omitempty" yaml:"targetWorkload,omitempty"`
 	Transitioning         string            `json:"transitioning,omitempty" yaml:"transitioning,omitempty"`

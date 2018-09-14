@@ -9,6 +9,7 @@ const (
 	ProjectAlertSpecFieldRecipients            = "recipients"
 	ProjectAlertSpecFieldRepeatIntervalSeconds = "repeatIntervalSeconds"
 	ProjectAlertSpecFieldSeverity              = "severity"
+	ProjectAlertSpecFieldTargetPipeline        = "targetPipeline"
 	ProjectAlertSpecFieldTargetPod             = "targetPod"
 	ProjectAlertSpecFieldTargetWorkload        = "targetWorkload"
 )
@@ -21,6 +22,7 @@ type ProjectAlertSpec struct {
 	Recipients            []Recipient     `json:"recipients,omitempty" yaml:"recipients,omitempty"`
 	RepeatIntervalSeconds int64           `json:"repeatIntervalSeconds,omitempty" yaml:"repeatIntervalSeconds,omitempty"`
 	Severity              string          `json:"severity,omitempty" yaml:"severity,omitempty"`
+	TargetPipeline        *TargetPipeline `json:"targetPipeline,omitempty" yaml:"targetPipeline,omitempty"`
 	TargetPod             *TargetPod      `json:"targetPod,omitempty" yaml:"targetPod,omitempty"`
 	TargetWorkload        *TargetWorkload `json:"targetWorkload,omitempty" yaml:"targetWorkload,omitempty"`
 }
