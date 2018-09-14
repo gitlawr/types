@@ -782,8 +782,9 @@ func NewWorkloadTypeMapper() types.Mapper {
 	}
 }
 
-func pipelineTypes(schema *types.Schemas) *types.Schemas {
-	return schema.
+func pipelineTypes(schemas *types.Schemas) *types.Schemas {
+
+	return schemas.
 		AddMapperForType(&Version, v3.SourceCodeProviderConfig{}).
 		AddMapperForType(&Version, v3.Pipeline{},
 			&m.Embed{Field: "status"},
@@ -887,6 +888,8 @@ func pipelineTypes(schema *types.Schemas) *types.Schemas {
 		MustImportAndCustomize(&Version, v3.SourceCodeRepository{}, func(schema *types.Schema) {
 			delete(schema.ResourceFields, "namespaceId")
 			schema.ResourceMethods = []string{http.MethodGet, http.MethodDelete}
-		})
-
+		}).
+		RemoveMapperForType(&Version, v3.Pipeline{}, &mapper.NamespaceReference{}).
+		RemoveMapperForType(&Version, v3.PipelineExecution{}, &mapper.NamespaceReference{}).
+		RemoveMapperForType(&Version, v3.SourceCodeRepository{}, &mapper.NamespaceReference{})
 }
