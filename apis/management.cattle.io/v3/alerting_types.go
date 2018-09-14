@@ -57,6 +57,7 @@ type ProjectAlertSpec struct {
 	ProjectName    string          `json:"projectName" norman:"type=reference[project]"`
 	TargetWorkload *TargetWorkload `json:"targetWorkload,omitempty"`
 	TargetPod      *TargetPod      `json:"targetPod,omitempty"`
+	TargetPipeline *TargetPipeline `json:"targetPipeline,omitempty"`
 }
 
 type Recipient struct {
@@ -89,6 +90,11 @@ type TargetWorkload struct {
 	WorkloadID          string            `json:"workloadId,omitempty"`
 	Selector            map[string]string `json:"selector,omitempty"`
 	AvailablePercentage int               `json:"availablePercentage,omitempty" norman:"required,min=1,max=100,default=70"`
+}
+
+type TargetPipeline struct {
+	PipelineID string `json:"pipelineId,omitempty"`
+	Condition  string `json:"condition,omitempty" norman:"required,options=success|failed|changed,default=failed"`
 }
 
 type TargetSystemService struct {
