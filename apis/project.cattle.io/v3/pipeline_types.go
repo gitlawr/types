@@ -182,10 +182,11 @@ type Stage struct {
 }
 
 type Step struct {
-	SourceCodeConfig   *SourceCodeConfig   `json:"sourceCodeConfig,omitempty" yaml:"sourceCodeConfig,omitempty"`
-	RunScriptConfig    *RunScriptConfig    `json:"runScriptConfig,omitempty" yaml:"runScriptConfig,omitempty"`
-	PublishImageConfig *PublishImageConfig `json:"publishImageConfig,omitempty" yaml:"publishImageConfig,omitempty"`
-	ApplyYamlConfig    *ApplyYamlConfig    `json:"applyYamlConfig,omitempty" yaml:"applyYamlConfig,omitempty"`
+	SourceCodeConfig     *SourceCodeConfig     `json:"sourceCodeConfig,omitempty" yaml:"sourceCodeConfig,omitempty"`
+	RunScriptConfig      *RunScriptConfig      `json:"runScriptConfig,omitempty" yaml:"runScriptConfig,omitempty"`
+	PublishImageConfig   *PublishImageConfig   `json:"publishImageConfig,omitempty" yaml:"publishImageConfig,omitempty"`
+	ApplyYamlConfig      *ApplyYamlConfig      `json:"applyYamlConfig,omitempty" yaml:"applyYamlConfig,omitempty"`
+	PublishCatalogConfig *PublishCatalogConfig `json:"publishCatalogConfig,omitempty" yaml:"publishCatalogConfig,omitempty"`
 
 	Env        map[string]string `json:"env,omitempty" yaml:"env,omitempty"`
 	EnvFrom    []EnvFrom         `json:"envFrom,omitempty" yaml:"envFrom,omitempty"`
@@ -223,6 +224,12 @@ type ApplyYamlConfig struct {
 	Path      string `json:"path,omitempty" yaml:"path,omitempty"`
 	Content   string `json:"content,omitempty" yaml:"content,omitempty"`
 	Namespace string `json:"namespace,omitempty" yaml:"namespace,omitempty"`
+}
+
+type PublishCatalogConfig struct {
+	Path    string `json:"path,omitempty" yaml:"path,omitempty"`
+	Catalog string `json:"catalog,omitempty" yaml:"catalog,omitempty"`
+	Version string `json:"version,omitempty" yaml:"version,omitempty"`
 }
 
 type PipelineExecutionSpec struct {
