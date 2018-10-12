@@ -187,6 +187,7 @@ type Step struct {
 	PublishImageConfig   *PublishImageConfig   `json:"publishImageConfig,omitempty" yaml:"publishImageConfig,omitempty"`
 	ApplyYamlConfig      *ApplyYamlConfig      `json:"applyYamlConfig,omitempty" yaml:"applyYamlConfig,omitempty"`
 	PublishCatalogConfig *PublishCatalogConfig `json:"publishCatalogConfig,omitempty" yaml:"publishCatalogConfig,omitempty"`
+	ApplyAppConfig       *ApplyAppConfig       `json:"applyAppConfig,omitempty" yaml:"applyAppConfig,omitempty"`
 
 	Env        map[string]string `json:"env,omitempty" yaml:"env,omitempty"`
 	EnvFrom    []EnvFrom         `json:"envFrom,omitempty" yaml:"envFrom,omitempty"`
@@ -230,6 +231,13 @@ type PublishCatalogConfig struct {
 	Path    string `json:"path,omitempty" yaml:"path,omitempty"`
 	Catalog string `json:"catalog,omitempty" yaml:"catalog,omitempty"`
 	Version string `json:"version,omitempty" yaml:"version,omitempty"`
+}
+
+type ApplyAppConfig struct {
+	Catalog         string `json:"catalog,omitempty" yaml:"catalog,omitempty"`
+	Version         string `json:"version,omitempty" yaml:"version,omitempty"`
+	Name            string `json:"name,omitempty" yaml:"name,omitempty"`
+	TargetNamespace string `json:"targetNamespace,omitempty" yaml:"targetNamespace,omitempty"`
 }
 
 type PipelineExecutionSpec struct {
