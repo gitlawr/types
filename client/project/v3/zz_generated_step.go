@@ -2,6 +2,7 @@ package client
 
 const (
 	StepType                      = "step"
+	StepFieldApplyAppConfig       = "applyAppConfig"
 	StepFieldApplyYamlConfig      = "applyYamlConfig"
 	StepFieldEnv                  = "env"
 	StepFieldEnvFrom              = "envFrom"
@@ -14,6 +15,7 @@ const (
 )
 
 type Step struct {
+	ApplyAppConfig       *ApplyAppConfig       `json:"applyAppConfig,omitempty" yaml:"applyAppConfig,omitempty"`
 	ApplyYamlConfig      *ApplyYamlConfig      `json:"applyYamlConfig,omitempty" yaml:"applyYamlConfig,omitempty"`
 	Env                  map[string]string     `json:"env,omitempty" yaml:"env,omitempty"`
 	EnvFrom              []EnvFrom             `json:"envFrom,omitempty" yaml:"envFrom,omitempty"`
