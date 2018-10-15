@@ -236,6 +236,7 @@ type PublishCatalogConfig struct {
 type ApplyAppConfig struct {
 	Catalog         string `json:"catalog,omitempty" yaml:"catalog,omitempty"`
 	Version         string `json:"version,omitempty" yaml:"version,omitempty"`
+	Answers         string `json:"answers,omitempty" yaml:"answers,omitempty"`
 	Name            string `json:"name,omitempty" yaml:"name,omitempty"`
 	TargetNamespace string `json:"targetNamespace,omitempty" yaml:"targetNamespace,omitempty"`
 }
