@@ -228,9 +228,13 @@ type ApplyYamlConfig struct {
 }
 
 type PublishCatalogConfig struct {
-	Path    string `json:"path,omitempty" yaml:"path,omitempty"`
-	Catalog string `json:"catalog,omitempty" yaml:"catalog,omitempty"`
-	Version string `json:"version,omitempty" yaml:"version,omitempty"`
+	Path      string `json:"path,omitempty" yaml:"path,omitempty"`
+	Catalog   string `json:"catalog,omitempty" yaml:"catalog,omitempty"`
+	Version   string `json:"version,omitempty" yaml:"version,omitempty"`
+	GitURL    string `json:"gitUrl,omitempty" yaml:"gitUrl,omitempty"`
+	GitBranch string `json:"gitBranch,omitempty" yaml:"gitBranch,omitempty"`
+	GitAuthor string `json:"gitAuthor,omitempty" yaml:"gitAuthor,omitempty"`
+	GitEmail  string `json:"gitEmail,omitempty" yaml:"gitEmail,omitempty"`
 }
 
 type ApplyAppConfig struct {
