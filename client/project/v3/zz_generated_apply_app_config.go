@@ -2,6 +2,7 @@ package client
 
 const (
 	ApplyAppConfigType                 = "applyAppConfig"
+	ApplyAppConfigFieldAnswers         = "answers"
 	ApplyAppConfigFieldCatalog         = "catalog"
 	ApplyAppConfigFieldName            = "name"
 	ApplyAppConfigFieldTargetNamespace = "targetNamespace"
@@ -9,6 +10,7 @@ const (
 )
 
 type ApplyAppConfig struct {
+	Answers         string `json:"answers,omitempty" yaml:"answers,omitempty"`
 	Catalog         string `json:"catalog,omitempty" yaml:"catalog,omitempty"`
 	Name            string `json:"name,omitempty" yaml:"name,omitempty"`
 	TargetNamespace string `json:"targetNamespace,omitempty" yaml:"targetNamespace,omitempty"`
