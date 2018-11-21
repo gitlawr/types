@@ -204,6 +204,8 @@ type Constraint struct {
 }
 
 type SourceCodeConfig struct {
+	SkipClone     bool `json:"skipClone,omitempty" yaml:"skipClone,omitempty"`
+	SkipTLSVerify bool `json:"skipTlsVerify,omitempty" yaml:"skipTlsVerify,omitempty"`
 }
 
 type RunScriptConfig struct {
