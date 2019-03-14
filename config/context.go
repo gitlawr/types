@@ -3,6 +3,7 @@ package config
 import (
 	"context"
 
+	certmanagerv1alpha1 "github.com/jetstack/cert-manager/pkg/client/clientset/versioned/typed/certmanager/v1alpha1"
 	"github.com/rancher/norman/controller"
 	"github.com/rancher/norman/objectclient/dynamic"
 	"github.com/rancher/norman/restwatch"
@@ -152,10 +153,11 @@ type ManagementContext struct {
 	Dialer            dialer.Factory
 	UserManager       user.Manager
 
-	Management managementv3.Interface
-	Project    projectv3.Interface
-	RBAC       rbacv1.Interface
-	Core       corev1.Interface
+	Management  managementv3.Interface
+	Project     projectv3.Interface
+	RBAC        rbacv1.Interface
+	Core        corev1.Interface
+	CertManager certmanagerv1alpha1.CertmanagerV1alpha1Interface
 }
 
 func (c *ManagementContext) controllers() []controller.Starter {
@@ -285,6 +287,11 @@ func NewManagementContext(config rest.Config) (*ManagementContext, error) {
 		return nil, err
 	}
 	context.Project, err = projectv3.NewForConfig(config)
+	if err != nil {
+		return nil, err
+	}
+
+	context.CertManager, err = certmanagerv1alpha1.NewForConfig(config)
 	if err != nil {
 		return nil, err
 	}
