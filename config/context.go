@@ -16,6 +16,7 @@ import (
 	clusterv3 "github.com/rancher/types/apis/cluster.cattle.io/v3"
 	clusterSchema "github.com/rancher/types/apis/cluster.cattle.io/v3/schema"
 	corev1 "github.com/rancher/types/apis/core/v1"
+
 	extv1beta1 "github.com/rancher/types/apis/extensions/v1beta1"
 	managementv3 "github.com/rancher/types/apis/management.cattle.io/v3"
 	managementSchema "github.com/rancher/types/apis/management.cattle.io/v3/schema"
@@ -291,7 +292,7 @@ func NewManagementContext(config rest.Config) (*ManagementContext, error) {
 		return nil, err
 	}
 
-	context.CertManager, err = certmanagerv1alpha1.NewForConfig(config)
+	context.CertManager, err = certmanagerv1alpha1.NewForConfig(&config)
 	if err != nil {
 		return nil, err
 	}
