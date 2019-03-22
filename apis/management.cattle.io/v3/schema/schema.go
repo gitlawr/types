@@ -42,7 +42,8 @@ var (
 		Init(etcdBackupTypes).
 		Init(monitorTypes).
 		Init(credTypes).
-		Init(mgmtSecretTypes)
+		Init(mgmtSecretTypes).
+		Init(globalRegistryTypes)
 
 	TokenSchemas = factory.Schemas(&Version).
 			Init(tokens)
@@ -803,4 +804,11 @@ func monitorTypes(schemas *types.Schemas) *types.Schemas {
 
 func etcdBackupTypes(schemas *types.Schemas) *types.Schemas {
 	return schemas.MustImport(&Version, v3.EtcdBackup{})
+}
+
+func globalRegistryTypes(schemas *types.Schemas) *types.Schemas {
+	return schemas.
+		TypeName("globalRegistry", v3.GlobalRegistry{}).
+		AddMapperForType(&Version, v3.GlobalRegistry{}, m.Drop{Field: "namespaceId"}).
+		MustImport(&Version, v3.GlobalRegistry{})
 }
