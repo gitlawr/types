@@ -27,7 +27,7 @@ type GlobalRegistry struct {
 }
 
 type GlobalRegistrySpec struct {
-	Answers map[string]string `json:"answers,omitempty" norman:"required"`
+	Answers map[string]string `json:"answers,omitempty"`
 }
 
 type GlobalRegistryStatus struct {
