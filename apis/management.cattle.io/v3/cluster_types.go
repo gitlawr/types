@@ -51,6 +51,7 @@ const (
 	ClusterConditionPrometheusOperatorDeployed condition.Cond = "PrometheusOperatorDeployed"
 	ClusterConditionMonitoringEnabled          condition.Cond = "MonitoringEnabled"
 	ClusterConditionAlertingEnabled            condition.Cond = "AlertingEnabled"
+	ClusterConditionRegistryCACertSynced       condition.Cond = "RegistryCACertSynced"
 
 	ClusterDriverImported = "imported"
 	ClusterDriverLocal    = "local"
