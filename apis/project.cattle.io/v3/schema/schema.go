@@ -1093,12 +1093,6 @@ func autoscalingTypes(schemas *types.Schemas) *types.Schemas {
 
 func istioTypes(schemas *types.Schemas) *types.Schemas {
 	return schemas.
-		AddMapperForType(&Version, istiov1alpha3.VirtualService{},
-			&m.AnnotationField{Field: "projectId"},
-		).
-		AddMapperForType(&Version, istiov1alpha3.DestinationRule{},
-			&m.AnnotationField{Field: "projectId"},
-		).
 		MustImport(&Version, istiov1alpha3.HTTPMatchRequest{}, struct {
 			Port *uint32 `json:"port,omitempty"`
 		}{}).
