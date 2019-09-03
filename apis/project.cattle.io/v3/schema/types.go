@@ -48,6 +48,7 @@ type EnvironmentFrom struct {
 
 type Scheduling struct {
 	Node              *NodeScheduling
+	Pod               *PodScheduling
 	Tolerate          []v1.Toleration
 	Scheduler         string
 	Priority          *int64
@@ -59,6 +60,22 @@ type NodeScheduling struct {
 	RequireAll []string
 	RequireAny []string
 	Preferred  []string
+}
+
+type PodScheduling struct {
+	Affinity     PodAffinitySpec
+	AntiAffinity PodAffinitySpec
+}
+
+type PodAffinitySpec struct {
+	Required  []PodAffinityRule
+	Preferred []PodAffinityRule
+}
+
+type PodAffinityRule struct {
+	Namespaces  []string
+	TopologyKey string
+	Rules       []string
 }
 
 type projectOverride struct {
