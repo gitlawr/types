@@ -12,12 +12,12 @@ require (
 	github.com/knative/pkg v0.0.0-20190817231834-12ee58e32cc8
 	github.com/kylelemons/godebug v1.1.0 // indirect
 	github.com/pkg/errors v0.8.1
-	github.com/rancher/norman v0.0.0-20190821234528-20a936b685b0
+	github.com/rancher/norman v0.0.0-20190917211548-a40a48add2fb
 	github.com/sirupsen/logrus v1.4.2
-	k8s.io/api v0.0.0-20190805182251-6c9aa3caf3d6
-	k8s.io/apiextensions-apiserver v0.0.0-20190805184801-2defa3e98ef1
-	k8s.io/apimachinery v0.0.0-20190404173353-6a84e37a896d
+	k8s.io/api v0.0.0-20190918155943-95b840bb6a1f
+	k8s.io/apiextensions-apiserver v0.0.0-20190918161926-8f644eb6e783
+	k8s.io/apimachinery v0.0.0-20190913080033-27d36303b655
 	k8s.io/client-go v11.0.1-0.20190805182715-88a2adca7e76+incompatible
-	k8s.io/gengo v0.0.0-20190327210449-e17681d19d3a
-	k8s.io/kube-aggregator v0.0.0-20190805183716-8439689952da
+	k8s.io/gengo v0.0.0-20190822140433-26a664648505
+	k8s.io/kube-aggregator v0.0.0-20190918161219-8c8f079fddc3
 )
