@@ -835,6 +835,7 @@ func kontainerTypes(schemas *types.Schemas) *types.Schemas {
 func monitorTypes(schemas *types.Schemas) *types.Schemas {
 	return schemas.
 		MustImport(&Version, v3.QueryGraphInput{}).
+		MustImport(&Version, v3.QueryGlobalGraphOutput{}).
 		MustImport(&Version, v3.QueryClusterGraphOutput{}).
 		MustImport(&Version, v3.QueryProjectGraphOutput{}).
 		MustImport(&Version, v3.QueryClusterMetricInput{}).
@@ -861,6 +862,14 @@ func monitorTypes(schemas *types.Schemas) *types.Schemas {
 				"listprojectmetricname": {
 					Input:  "projectMetricNamesInput",
 					Output: "metricNamesOutput",
+				},
+			}
+		}).
+		MustImportAndCustomize(&Version, v3.GlobalMonitorGraph{}, func(schema *types.Schema) {
+			schema.CollectionActions = map[string]types.Action{
+				"query": {
+					Input:  "queryGraphInput",
+					Output: "queryGlobalGraphOutput",
 				},
 			}
 		}).
