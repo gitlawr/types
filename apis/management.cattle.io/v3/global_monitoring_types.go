@@ -1,9 +1,9 @@
 package v3
 
 import (
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"github.com/rancher/norman/types"
-	)
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+)
 
 type GlobalMonitorGraph struct {
 	types.Namespaced
@@ -22,7 +22,6 @@ type GlobalMonitorGraphSpec struct {
 	CommonMonitorGraphSpec
 }
 
-
 type GlobalAlertRule struct {
 	types.Namespaced
 
@@ -39,10 +38,9 @@ type GlobalAlertRule struct {
 
 type GlobalAlertRuleSpec struct {
 	CommonRuleField
-	GroupName         string             `json:"groupName" norman:"type=reference[clusterAlertGroup]"`
-	MetricRule        *MetricRule        `json:"metricRule,omitempty"`
+	GroupName  string      `json:"groupName" norman:"type=reference[clusterAlertGroup]"`
+	MetricRule *MetricRule `json:"metricRule,omitempty"`
 }
-
 
 type GlobalAlertGroup struct {
 	types.Namespaced
@@ -58,8 +56,7 @@ type GlobalAlertGroup struct {
 	Status AlertStatus `json:"status"`
 }
 
-
 type GlobalGroupSpec struct {
-	Recipients  []Recipient `json:"recipients,omitempty"`
+	Recipients []Recipient `json:"recipients,omitempty"`
 	CommonGroupField
 }

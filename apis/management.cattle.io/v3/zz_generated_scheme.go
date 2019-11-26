@@ -139,6 +139,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&ClusterScanList{},
 		&MonitorMetric{},
 		&MonitorMetricList{},
+		&GlobalMonitorGraph{},
+		&GlobalMonitorGraphList{},
 		&ClusterMonitorGraph{},
 		&ClusterMonitorGraphList{},
 		&ProjectMonitorGraph{},

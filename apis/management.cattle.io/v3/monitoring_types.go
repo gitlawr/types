@@ -112,7 +112,7 @@ type QueryGraphInput struct {
 }
 
 type QueryGlobalGraphOutput struct {
-	Type string              `json:"type,omitempty"`
+	Type string             `json:"type,omitempty"`
 	Data []QueryGlobalGraph `json:"data,omitempty"`
 }
 
