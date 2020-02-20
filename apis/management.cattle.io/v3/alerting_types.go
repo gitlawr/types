@@ -5,6 +5,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
+
 type ClusterAlert struct {
 	types.Namespaced
 
@@ -99,6 +100,20 @@ type AlertStatus struct {
 	AlertState string `json:"alertState,omitempty" norman:"options=active|inactive|alerting|muted,default=active"`
 }
 
+type GlobalAlertGroup struct {
+	types.Namespaced
+
+	metav1.TypeMeta `json:",inline"`
+	// Standard object’s metadata. More info:
+	// https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+
+	Spec ClusterGroupSpec `json:"spec"`
+	// Most recent observed status of the alert. More info:
+	// https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status
+	Status AlertStatus `json:"status"`
+}
+
 type ClusterAlertGroup struct {
 	types.Namespaced
 
@@ -127,6 +142,11 @@ type ProjectAlertGroup struct {
 	Status AlertStatus `json:"status"`
 }
 
+type GlobalGroupSpec struct {
+	Recipients  []Recipient `json:"recipients,omitempty"`
+	CommonGroupField
+}
+
 type ClusterGroupSpec struct {
 	ClusterName string      `json:"clusterName" norman:"type=reference[cluster]"`
 	Recipients  []Recipient `json:"recipients,omitempty"`
@@ -137,6 +157,26 @@ type ProjectGroupSpec struct {
 	ProjectName string      `json:"projectName" norman:"type=reference[project]"`
 	Recipients  []Recipient `json:"recipients,omitempty"`
 	CommonGroupField
+}
+
+type GlobalAlertRule struct {
+	types.Namespaced
+
+	metav1.TypeMeta `json:",inline"`
+	// Standard object’s metadata. More info:
+	// https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#metadata
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+
+	Spec GlobalAlertRuleSpec `json:"spec"`
+	// Most recent observed status of the alert. More info:
+	// https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md#spec-and-status
+	Status AlertStatus `json:"status"`
+}
+
+type GlobalAlertRuleSpec struct {
+	CommonRuleField
+	GroupName         string             `json:"groupName" norman:"type=reference[globalAlertGroup]"`
+	MetricRule        *MetricRule        `json:"metricRule,omitempty"`
 }
 
 type ClusterAlertRule struct {
