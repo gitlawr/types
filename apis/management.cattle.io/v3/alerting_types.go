@@ -5,7 +5,6 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-
 type ClusterAlert struct {
 	types.Namespaced
 
@@ -143,7 +142,7 @@ type ProjectAlertGroup struct {
 }
 
 type GlobalGroupSpec struct {
-	Recipients  []Recipient `json:"recipients,omitempty"`
+	Recipients []Recipient `json:"recipients,omitempty"`
 	CommonGroupField
 }
 
@@ -175,8 +174,8 @@ type GlobalAlertRule struct {
 
 type GlobalAlertRuleSpec struct {
 	CommonRuleField
-	GroupName         string             `json:"groupName" norman:"type=reference[globalAlertGroup]"`
-	MetricRule        *MetricRule        `json:"metricRule,omitempty"`
+	GroupName  string      `json:"groupName" norman:"type=reference[globalAlertGroup]"`
+	MetricRule *MetricRule `json:"metricRule,omitempty"`
 }
 
 type ClusterAlertRule struct {
